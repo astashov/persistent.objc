@@ -1,0 +1,52 @@
+//
+//  PrefixHeader.pch
+//  Persistent
+//
+//  Created by Anton Astashov on 04/10/14.
+//  Copyright (c) 2014 Anton Astashov. All rights reserved.
+//
+
+#ifndef Persistent_PrefixHeader_pch
+#define Persistent_PrefixHeader_pch
+
+static const int SHIFT = 5;
+static const int SIZE = 1 << SHIFT;
+static const int MASK = SIZE - 1;
+
+static AAVNode *transientVNode(AAVNode *node, AAOwner *owner) {
+    if (owner != nil && node != nil && owner == node.owner) {
+        return node;
+    } else {
+        return [[AAVNode alloc]
+                initWithArray: (node != nil ? [NSMutableArray arrayWithArray:node.array] : [NSMutableArray array])
+                andOwner: owner
+                ];
+    }
+}
+
+
+// Jenkins hash functions
+
+static NSUInteger hashCombine(NSUInteger hash, NSUInteger value) {
+    hash = 0x1fffffff & (hash + value);
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+}
+
+static NSUInteger finish(NSUInteger hash) {
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+}
+
+//
+
+static NSUInteger hashObjects(NSObject<NSFastEnumeration> *objects) {
+    NSUInteger hash = 0;
+    for (id object in objects) {
+        hash = hashCombine(hash, [object hash]);
+    }
+    return finish(hash);
+}
+
+#endif
