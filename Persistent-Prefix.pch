@@ -13,14 +13,14 @@ static const int SHIFT = 5;
 static const int SIZE = 1 << SHIFT;
 static const int MASK = SIZE - 1;
 
-static AAVNode *transientVNode(AAVNode *node, AAOwner *owner) {
+static AAVNode *maybeCopyVNode(AAVNode *node, AAOwner *owner) {
     if (owner != nil && node != nil && owner == node.owner) {
         return node;
     } else {
         return [[AAVNode alloc]
-                initWithArray: (node != nil ? [NSMutableArray arrayWithArray:node.array] : [NSMutableArray array])
-                andOwner: owner
-                ];
+            initWithArray: (node != nil ? [NSMutableArray arrayWithArray:node.array] : [NSMutableArray array])
+            andOwner: owner
+        ];
     }
 }
 

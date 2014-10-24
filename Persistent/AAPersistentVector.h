@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AABaseVector.h"
+#import "AABaseVectorPrivate.h"
 
 @interface AAPersistentVector : AABaseVector
 

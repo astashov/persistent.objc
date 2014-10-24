@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AABaseVector.h"
+#import "AABaseVectorPrivate.h"
 #import "AATransientVector.h"
 #import "AAPersistentVector.h"
 #import "AAVNode.h"
@@ -29,51 +29,58 @@
     return self;
 }
 
+#pragma mark API
+
 -(id)get:(NSUInteger)index {
-    AAVNode *node = [self vectorNodeFor:index];
-    NSUInteger maskedIndex = index & MASK;
-    return [node get:maskedIndex];
+    if (index > self.size - 1) {
+        return nil;
+    } else {
+        AAVNode *node = [self vectorNodeFor:index];
+        NSUInteger maskedIndex = index & MASK;
+        return [node get:maskedIndex];
+    }
 }
 
 -(instancetype)set:(NSUInteger)index withValue:(id)value {
-    AAVNode *newTail = self.tail;
-    AAVNode *newRoot = self.root;
-    AABool *didAlter = [[AABool alloc] init];
-    if (index >= [self tailOffset]) {
-        newTail = [newTail update:index withValue:value level:0 owner:self.owner didAlter:didAlter];
+    if (index < self.size) {
+        AAVNode *newTail = self.tail;
+        AAVNode *newRoot = self.root;
+        AABool *didAlter = [[AABool alloc] init];
+        if (index >= [self tailOffset]) {
+            newTail = [newTail update:index withValue:value level:0 owner:self.owner didAlter:didAlter];
+        } else {
+            newRoot = [newRoot update:index withValue:value level:self.level owner:self.owner didAlter:didAlter];
+        }
+        if (!didAlter.value) {
+            return self;
+        } else if (self.owner) {
+            self.root = newRoot;
+            self.tail = newTail;
+            self.altered = YES;
+            return self;
+        } else {
+            return [[AAPersistentVector alloc] initWithSize:self.size level:self.level root:newRoot tail:newTail];
+        }
     } else {
-        newRoot = [newRoot update:index withValue:value level:self.level owner:self.owner didAlter:didAlter];
+        NSString *format = self.size == 0 ? @"empty vector" : [NSString stringWithFormat:@"[0 .. %lu]", self.size - 1];
+        [NSException raise:NSRangeException format:@"index %lu beyond bounds for %@", (unsigned long)index, format];
     }
-    if (!didAlter.value) {
-        return self;
-    } else if (self.owner) {
-        self.root = newRoot;
-        self.tail = newTail;
-        self.altered = YES;
-        return self;
-    } else {
-        return [[AAPersistentVector alloc] initWithSize:self.size level:self.level root:newRoot tail:newTail];
-    }
+    return nil;
 }
 
 -(instancetype)push:(id)value {
     NSUInteger length = self.size;
     return [self withTransient:^(AATransientVector *transient) {
-        [transient resize:length + 1];
-        [transient set:length withValue:value];
+        return [[transient increaseSize] set:length withValue:value];
     }];
 }
 
 -(instancetype)pop {
     if (self.size > 0) {
-        return [self resize:self.size - 1];
+        return [self decreaseSize];
     } else {
         return self;
     }
-}
-
--(NSString *)description {
-    return [[self all] description];
 }
 
 -(AABaseVector *)asTransient {
@@ -84,11 +91,34 @@
     return [self ensureOwner:nil];
 }
 
--(AABaseVector *)withTransient:(void (^)(AATransientVector *))block {
+-(AABaseVector *)withTransient:(AABaseVector *(^)(AATransientVector *))block {
     AATransientVector *transient = (AATransientVector *)[self asTransient];
-    block(transient);
+    transient = (AATransientVector *)block(transient);
     return transient.altered ? [transient ensureOwner:self.owner] : self;
 }
+
+-(NSArray *)asArray {
+    NSMutableArray *a = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < self.size; i += 1) {
+        [a addObject:[self get:i]];
+    }
+    return [NSArray arrayWithArray:a];
+}
+
+-(NSString *)description {
+    return [[self asArray] description];
+}
+
+-(NSString *)internals {
+    NSMutableDictionary *a = [[NSMutableDictionary alloc] init];
+    a[@"owner"] = self.owner ?: [NSNull null];
+    a[@"root"] = self.root;
+    a[@"tail"] = self.tail;
+    a[@"level"] = @(self.level);
+    return [a description];
+}
+
+# pragma mark Private Methods
 
 -(AABaseVector *)ensureOwner:(AAOwner *)owner {
     if (owner == self.owner) {
@@ -101,56 +131,60 @@
     }
 }
 
--(AABaseVector *)resize:(NSUInteger)newSize {
-    NSUInteger oldSize = self.size;
-    if (oldSize == newSize) {
-        return self;
-    } else {
-        AAOwner *owner = self.owner == nil ? nil : [[AAOwner alloc] init];
-        NSUInteger newLevel = self.level;
-        AAVNode *newRoot = self.root;
-        NSUInteger oldTailOffset = [self tailOffset];
-        NSUInteger newTailOffset = [self tailOffsetWithSize:newSize];
-        while (newTailOffset >= (1 << (newLevel + SHIFT))) {
-            NSMutableArray *newArray;
-            if (newRoot && [newRoot count] > 0) {
-                newArray = [NSMutableArray arrayWithArray:@[newRoot]];
-            } else {
-                newArray = [NSMutableArray array];
-            }
-            newRoot = [[AAVNode alloc] initWithArray:newArray andOwner:owner];
-            newLevel += SHIFT;
-        }
-        AAVNode *oldTail = self.tail;
-        AAVNode *newTail;
-        if (newTailOffset < oldTailOffset) {
-            newTail = [self vectorNodeFor:newSize - 1];
-        } else if (newTailOffset > oldTailOffset) {
-            newTail = [[AAVNode alloc] initWithArray:[NSMutableArray array] andOwner:owner];
-        } else {
-            newTail = oldTail;
-        }
+-(AABaseVector *)increaseSize {
+    return [self resize:YES];
+}
 
-        if (newTailOffset > oldTailOffset && oldSize > 0 && [oldTail count] > 0) {
-            newRoot = transientVNode(newRoot, owner);
+-(AABaseVector *)decreaseSize {
+    return [self resize:NO];
+}
+
+-(AABaseVector *)resize:(BOOL)isIncrease {
+    NSUInteger newSize = isIncrease ? self.size + 1 : self.size - 1;
+    AAOwner *owner = self.owner == nil ? nil : [[AAOwner alloc] init];
+    NSUInteger oldTailOffset = [self tailOffset];
+    NSUInteger newTailOffset = [self tailOffsetWithSize:newSize];
+    BOOL isNewTail = oldTailOffset != newTailOffset;
+
+    AAVNode *newRoot = self.root;
+    NSUInteger newLevel = self.level;
+    AAVNode *newTail = self.tail;
+
+    if (isIncrease) {
+        if (isNewTail) {
+            newTail = [[AAVNode alloc] initWithArray:[NSMutableArray array] andOwner:owner];
+
+            // Create wrapping root if we are out of space in the current root
+            if (newTailOffset >= (1 << (newLevel + SHIFT))) {
+                NSMutableArray *newArray = [NSMutableArray arrayWithArray:@[self.root]];
+                newRoot = [[AAVNode alloc] initWithArray:newArray andOwner:owner];
+                newLevel += SHIFT;
+            }
+            newRoot = maybeCopyVNode(newRoot, owner);
+
+            // Move tail to the appropriate trie leaf, recreating all the nodes down the path
             AAVNode *node = newRoot;
             for (NSUInteger level = newLevel; level > SHIFT; level -= SHIFT) {
                 NSUInteger idx = (oldTailOffset >> level) & MASK;
-                [node set:transientVNode([node get:idx], owner) toIndex:idx];
+                [node set:maybeCopyVNode([node get:idx], owner) toIndex:idx];
                 node = [node get:idx];
             }
-            [node set:oldTail toIndex:((oldTailOffset >> SHIFT) & MASK)];
+            [node set:self.tail toIndex:((oldTailOffset >> SHIFT) & MASK)];
         }
+    } else {
+        if (isNewTail) {
+            newTail = [self vectorNodeFor:newSize - 1];
+            newRoot = maybeCopyVNode(newRoot, owner);
 
-        if (newTailOffset < oldTailOffset) {
-            newRoot = transientVNode(newRoot, owner);
             AAVNode *node = newRoot;
             AAVNode *parent;
             NSUInteger idx = 0;
+
+            // Recreating all nodes down the path to the target trie leaf
             for (NSUInteger level = newLevel; level > SHIFT; level -= SHIFT) {
                 parent = node;
                 idx = (newTailOffset >> level) & MASK;
-                [node set:transientVNode([node get:idx], owner) toIndex:idx];
+                [node set:maybeCopyVNode([node get:idx], owner) toIndex:idx];
                 node = [node get:idx];
             }
             AAVNode *newNode = [node removeAfter:[node count] - 1 withOwner:owner];
@@ -160,22 +194,20 @@
                 newRoot = newNode;
             }
         }
-
-        if (newSize < oldSize) {
-            newTail = [newTail removeAfter:newSize withOwner:owner];
-        }
-
-        if (owner) {
-            self.size = newSize;
-            self.level = newLevel;
-            self.root = newRoot;
-            self.tail = newTail;
-            self.altered = YES;
-            return self;
-        } else {
-            return [[AAPersistentVector alloc] initWithSize:newSize level:newLevel root:newRoot tail:newTail];
-        }
+        newTail = [newTail removeAfter:newSize withOwner:owner];
     }
+
+    if (owner) {
+        self.size = newSize;
+        self.level = newLevel;
+        self.root = newRoot;
+        self.tail = newTail;
+        self.altered = YES;
+        return self;
+    } else {
+        return [[AAPersistentVector alloc] initWithSize:newSize level:newLevel root:newRoot tail:newTail];
+    }
+
 }
 
 -(AAVNode *)vectorNodeFor:(NSUInteger)index {
@@ -190,6 +222,7 @@
         }
         return node;
     } else {
+        // TODO: Not sure when this could happen...
         return nil;
     }
 }
@@ -202,15 +235,7 @@
     return size < SIZE ? 0 : (((size - 1) >> SHIFT) << SHIFT);
 }
 
--(NSArray *)all {
-    NSMutableArray *a = [[NSMutableArray alloc] init];
-    for (id value in self) {
-        [a addObject:value];
-    }
-    return [NSArray arrayWithArray:a];
-}
-
--(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+/*-(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
                                  objects:(id __unsafe_unretained [])buffer
                                    count:(NSUInteger)len {
     if (state->state == 0) {
@@ -227,7 +252,7 @@
     }
     state->itemsPtr = buffer;
     return i;
-}
+}*/
 
 -(NSUInteger)hash {
     if (!_hash) {

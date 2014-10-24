@@ -22,6 +22,10 @@
 		3A588BA219E055BB00746226 /* AABool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8619DFADAA00746226 /* AABool.m */; };
 		3A588BA319E055BB00746226 /* AATransientVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8919DFCB8500746226 /* AATransientVector.m */; };
 		3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */; };
+		3A588BAB19E1F32E00746226 /* AAPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BAA19E1F32E00746226 /* AAPair.m */; };
+		3A588BAC19E1F32E00746226 /* AAPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BAA19E1F32E00746226 /* AAPair.m */; };
+		3A588BB319E37E6C00746226 /* AAMNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BB219E37E6C00746226 /* AAMNode.m */; };
+		3A588BB419E37E6C00746226 /* AAMNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BB219E37E6C00746226 /* AAMNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +61,11 @@
 		3A588B9719DFD56500746226 /* PersistentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentTests.m; sourceTree = "<group>"; };
 		3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVectorClass.m; sourceTree = "<group>"; };
 		3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Persistent-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		3A588BA919E1F32E00746226 /* AAPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPair.h; sourceTree = "<group>"; };
+		3A588BAA19E1F32E00746226 /* AAPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPair.m; sourceTree = "<group>"; };
+		3A588BB119E37E6C00746226 /* AAMNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMNode.h; sourceTree = "<group>"; };
+		3A588BB219E37E6C00746226 /* AAMNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMNode.m; sourceTree = "<group>"; };
+		3AF8835619FA008B00687633 /* AABaseVectorPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseVectorPrivate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,21 +107,9 @@
 		3A29EC4819DC5E0E006643CB /* Persistent */ = {
 			isa = PBXGroup;
 			children = (
+				3A588BB619E38F1900746226 /* Map */,
+				3A588BB519E38F0700746226 /* Vector */,
 				3A29EC4919DC5E0E006643CB /* main.m */,
-				3A29EC5219DC5E58006643CB /* AABaseVector.h */,
-				3A29EC5319DC5E58006643CB /* AABaseVector.m */,
-				3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */,
-				3A29EC5819DC7251006643CB /* AAVNode.h */,
-				3A29EC5919DC7251006643CB /* AAVNode.m */,
-				3A29EC5B19DC7288006643CB /* AAShared.h */,
-				3A29EC5C19DC72F0006643CB /* AAOwner.h */,
-				3A29EC5D19DC72F0006643CB /* AAOwner.m */,
-				3A588B8519DFADAA00746226 /* AABool.h */,
-				3A588B8619DFADAA00746226 /* AABool.m */,
-				3A588B8819DFCB8500746226 /* AATransientVector.h */,
-				3A588B8919DFCB8500746226 /* AATransientVector.m */,
-				3A588B8B19DFCC9F00746226 /* AAPersistentVector.h */,
-				3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */,
 			);
 			path = Persistent;
 			sourceTree = "<group>";
@@ -133,6 +130,39 @@
 				3A588B9619DFD56500746226 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A588BB519E38F0700746226 /* Vector */ = {
+			isa = PBXGroup;
+			children = (
+				3A29EC5219DC5E58006643CB /* AABaseVector.h */,
+				3A29EC5319DC5E58006643CB /* AABaseVector.m */,
+				3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */,
+				3A29EC5819DC7251006643CB /* AAVNode.h */,
+				3A29EC5919DC7251006643CB /* AAVNode.m */,
+				3A29EC5B19DC7288006643CB /* AAShared.h */,
+				3A29EC5C19DC72F0006643CB /* AAOwner.h */,
+				3A29EC5D19DC72F0006643CB /* AAOwner.m */,
+				3A588B8519DFADAA00746226 /* AABool.h */,
+				3A588B8619DFADAA00746226 /* AABool.m */,
+				3A588B8819DFCB8500746226 /* AATransientVector.h */,
+				3A588B8919DFCB8500746226 /* AATransientVector.m */,
+				3A588B8B19DFCC9F00746226 /* AAPersistentVector.h */,
+				3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */,
+				3AF8835619FA008B00687633 /* AABaseVectorPrivate.h */,
+			);
+			name = Vector;
+			sourceTree = "<group>";
+		};
+		3A588BB619E38F1900746226 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				3A588BA919E1F32E00746226 /* AAPair.h */,
+				3A588BAA19E1F32E00746226 /* AAPair.m */,
+				3A588BB119E37E6C00746226 /* AAMNode.h */,
+				3A588BB219E37E6C00746226 /* AAMNode.m */,
+			);
+			name = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,11 +253,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A29EC4A19DC5E0E006643CB /* main.m in Sources */,
+				3A588BAB19E1F32E00746226 /* AAPair.m in Sources */,
 				3A588B8719DFADAA00746226 /* AABool.m in Sources */,
 				3A29EC5E19DC72F0006643CB /* AAOwner.m in Sources */,
 				3A588B8A19DFCB8500746226 /* AATransientVector.m in Sources */,
 				3A588B8D19DFCC9F00746226 /* AAPersistentVector.m in Sources */,
 				3A29EC5A19DC7251006643CB /* AAVNode.m in Sources */,
+				3A588BB319E37E6C00746226 /* AAMNode.m in Sources */,
 				3A29EC5419DC5E58006643CB /* AABaseVector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,10 +269,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A588B9F19E055B100746226 /* AABaseVector.m in Sources */,
+				3A588BB419E37E6C00746226 /* AAMNode.m in Sources */,
 				3A588B9D19DFD58A00746226 /* AAPersistentVectorClass.m in Sources */,
 				3A588BA019E055BB00746226 /* AAVNode.m in Sources */,
 				3A588BA119E055BB00746226 /* AAOwner.m in Sources */,
 				3A588B9819DFD56500746226 /* PersistentTests.m in Sources */,
+				3A588BAC19E1F32E00746226 /* AAPair.m in Sources */,
 				3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */,
 				3A588BA319E055BB00746226 /* AATransientVector.m in Sources */,
 				3A588BA219E055BB00746226 /* AABool.m in Sources */,
@@ -402,6 +436,7 @@
 				3A588B9B19DFD56500746226 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

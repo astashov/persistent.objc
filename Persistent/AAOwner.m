@@ -10,4 +10,8 @@
 
 @implementation AAOwner
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%p", self];
+}
+
 @end

@@ -25,8 +25,12 @@
     return [self.array count];
 }
 
+-(BOOL)isEmpty {
+    return [self count] == 0;
+}
+
 -(NSString *)description {
-    return [NSString stringWithFormat: @"VNode: %@", self.array];
+    return [NSString stringWithFormat:@"[%@ (%p)]", [self.array componentsJoinedByString:@", "], self.owner];
 }
 
 -(void)set:(id)value toIndex:(NSUInteger)index {
@@ -53,7 +57,7 @@
     if (newSize != 0 && sizeIndex >= [self count] - 1) {
         return self;
     } else {
-        AAVNode *editableNode = transientVNode(self, owner);
+        AAVNode *editableNode = maybeCopyVNode(self, owner);
         if (newSize == 0) {
             editableNode.array = [NSMutableArray array];
         } else {
@@ -75,7 +79,7 @@
         if (newLowerNode == lowerNode) {
             return self;
         } else {
-            AAVNode *newNode = transientVNode(self, owner);
+            AAVNode *newNode = maybeCopyVNode(self, owner);
             [newNode set:newLowerNode toIndex:idx];
             return newNode;
         }
@@ -84,7 +88,7 @@
             return self;
         } else {
             didAlter.value = YES;
-            AAVNode *newNode = transientVNode(self, owner);
+            AAVNode *newNode = maybeCopyVNode(self, owner);
             [newNode set:value toIndex:idx];
             return newNode;
         }

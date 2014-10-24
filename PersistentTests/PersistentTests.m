@@ -26,7 +26,7 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
-
+/*
 - (void)testExample {
     // This is an example of a functional test case.
     XCTAssert(YES, @"Pass");
@@ -37,10 +37,11 @@
     [self measureBlock:^{
 //        AAPersistentVector *v = [[AAPersistentVector alloc] init];
 //        AATransientVector *t = (AATransientVector *)[v asTransient];
-//        for (int i = 0; i < 10000; i += 1) {
-//            t = [t push:@(i)];
+//        for (int i = 0; i < 1000000; i += 1) {
+//            [t push:@(i)];
 //        }
 //        v = (AAPersistentVector *)[t asPersistent];
+        //NSLog(@"%@", v);
 //        NSUInteger a = 0;
 //        for (NSNumber *i in v) {
 //            a += [i unsignedIntegerValue];
@@ -48,7 +49,7 @@
 //        NSLog(@"%lu", a);
 
 //        NSMutableArray *b = [[NSMutableArray alloc] init];
-//        for (int i = 0; i < 10000; i += 1) {
+//        for (int i = 0; i < 1000000; i += 1) {
 //            [b addObject:@(i)];
 //        }
 //        NSUInteger c = 0;
@@ -69,6 +70,6 @@
 //        }
 //        NSLog(@"%lu", c);
     }];
-}
+}*/
 
 @end

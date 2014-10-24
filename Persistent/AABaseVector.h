@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 @class AAOwner;
 @class AAVNode;
+@class AATransientVector;
 
-@interface AABaseVector : NSObject <NSFastEnumeration> {
+@interface AABaseVector : NSObject { // <NSFastEnumeration> {
     NSUInteger _size;
     AAOwner *_owner;
     AAVNode *_root;
@@ -22,18 +23,20 @@
 
 -(id)get:(NSUInteger)index;
 -(instancetype)set:(NSUInteger)index withValue:(id)value;
+
 -(instancetype)push:(id)value;
 -(instancetype)pop;
 
 -(AABaseVector *)asTransient;
 -(AABaseVector *)asPersistent;
+-(AABaseVector *)withTransient:(AABaseVector *(^)(AATransientVector *))block;
 
-@property NSUInteger size;
-@property AAOwner *owner;
-@property AAVNode *root;
-@property AAVNode *tail;
-@property NSUInteger level;
-@property BOOL altered;
-@property(nonatomic) NSUInteger hash;
+-(NSArray *)asArray;
+
+// For debugging only :)
+-(NSString *)internals;
+
+@property(readonly) NSUInteger size;
+@property(readonly) NSUInteger hash;
 
 @end
