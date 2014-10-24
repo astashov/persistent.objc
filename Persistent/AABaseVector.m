@@ -235,7 +235,7 @@
     return size < SIZE ? 0 : (((size - 1) >> SHIFT) << SHIFT);
 }
 
-/*-(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+-(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
                                  objects:(id __unsafe_unretained [])buffer
                                    count:(NSUInteger)len {
     if (state->state == 0) {
@@ -252,7 +252,7 @@
     }
     state->itemsPtr = buffer;
     return i;
-}*/
+}
 
 -(NSUInteger)hash {
     if (!_hash) {

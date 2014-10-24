@@ -104,4 +104,29 @@
     XCTAssertEqual([f get:10], @(2000));
 }
 
+-(void)testFastEnumeration {
+    AAPersistentVector *v = [[AAPersistentVector alloc] init];
+    for (int i = 0; i < 100; i += 1) { v = [v push:@(i)]; }
+
+    NSUInteger i = 0;
+    for (id value in v) {
+        XCTAssertEqual(value, [v get:i]);
+        i += 1;
+    }
+}
+
+-(void)testEquality {
+    AAPersistentVector *a = [[AAPersistentVector alloc] init];
+    for (int i = 0; i < 100; i += 1) { a = [a push:@(i)]; }
+
+    AAPersistentVector *b = [[AAPersistentVector alloc] init];
+    for (int i = 0; i < 100; i += 1) { b = [b push:@(i)]; }
+
+    AAPersistentVector *c = [[AAPersistentVector alloc] init];
+    for (int i = 0; i < 99; i += 1) { c = [c push:@(i)]; }
+
+    XCTAssertEqualObjects(a, a);
+    XCTAssertEqualObjects(a, b);
+    XCTAssertNotEqualObjects(a, c);
+}
 @end

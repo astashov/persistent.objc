@@ -15,7 +15,7 @@ It doesn't have methods for inserting/removing elements in the middle of the vec
 
 ## TODO
 
-* Add NSFastEnumeration for AABaseVector
+* Improve NSFastEnumeration for AABaseVector
 * Add AAPersistentHashMap
 * Add AAPersistentSet
 

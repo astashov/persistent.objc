@@ -16,8 +16,8 @@
 @property AAVNode *tail;
 @property NSUInteger level;
 @property BOOL altered;
-@property NSUInteger size;
-@property NSUInteger hash;
+@property(nonatomic) NSUInteger size;
+@property(nonatomic) NSUInteger hash;
 
 @end
 
