@@ -110,6 +110,7 @@
 				3A588BB619E38F1900746226 /* Map */,
 				3A588BB519E38F0700746226 /* Vector */,
 				3A29EC4919DC5E0E006643CB /* main.m */,
+				3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */,
 			);
 			path = Persistent;
 			sourceTree = "<group>";
@@ -137,7 +138,6 @@
 			children = (
 				3A29EC5219DC5E58006643CB /* AABaseVector.h */,
 				3A29EC5319DC5E58006643CB /* AABaseVector.m */,
-				3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */,
 				3A29EC5819DC7251006643CB /* AAVNode.h */,
 				3A29EC5919DC7251006643CB /* AAVNode.m */,
 				3A29EC5B19DC7288006643CB /* AAShared.h */,
@@ -151,7 +151,7 @@
 				3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */,
 				3AF8835619FA008B00687633 /* AABaseVectorPrivate.h */,
 			);
-			name = Vector;
+			path = Vector;
 			sourceTree = "<group>";
 		};
 		3A588BB619E38F1900746226 /* Map */ = {
@@ -162,7 +162,7 @@
 				3A588BB119E37E6C00746226 /* AAMNode.h */,
 				3A588BB219E37E6C00746226 /* AAMNode.m */,
 			);
-			name = Map;
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
