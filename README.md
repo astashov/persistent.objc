@@ -1,12 +1,14 @@
 ## Persistent Data Structures for Objective-C
 
-The goal of this project is to implement persistent data structures for Objective-C. Mostly, it's port of [Clojure's PersistentVector](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/PersistentVector.java) and [Dart's Persistent Vector](https://github.com/vacuumlabs/persistent/blob/master/lib/src/vector_impl.dart). It uses the same optimizations, which are used in Clojure and Dart - tails and transients.
+The goal of this project is to implement persistent data structures for Objective-C.
 
-There is only AAPersistentVector for now, check out https://github.com/astashov/persistent.objc/blob/master/Persistent/AABaseVector.h for its API.
+### [Vector](https://github.com/astashov/persistent.objc/blob/master/Persistent/Vector/AABaseVector.h)
 
-Basically there are `push`/`pop` and `get`/`set` operations, and also `withTransient` method, which allows you to temporarily make the vector mutable and make modifications without creating instances every single time we make operations with it.
+For now, it's a port of [Clojure's PersistentVector](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/PersistentVector.java) and [Dart's Persistent Vector](https://github.com/vacuumlabs/persistent/blob/master/lib/src/vector_impl.dart). It's a persistent bit-partitioned vector trie, and it uses the same optimizations, which are used in Clojure and Dart - tails and transients.
 
-It doesn't have methods for inserting/removing elements in the middle of the vector. Unfortunately, you have to do that in a slow way - by creating a new vector from the scratch with (or without) the element.
+Basically there are `push`/`pop` and `get`/`set` operations, and also `withTransient` method, which allows you to temporarily make the vector mutable and make modifications without creating instances every single time you make operations on it.
+
+It doesn't have methods for inserting/removing elements in the middle of the vector. Unfortunately, you have to do that in a slow way - by creating a new vector from the scratch with (or - for deletion - without) the element.
 
 ## Reading
 
