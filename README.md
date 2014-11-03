@@ -10,14 +10,26 @@ Basically there are `push`/`pop` and `get`/`set` operations, and also `withTrans
 
 It doesn't have methods for inserting/removing elements in the middle of the vector. Unfortunately, you have to do that in a slow way - by creating a new vector from the scratch with (or - for deletion - without) the element.
 
+### [HashMap](https://github.com/astashov/persistent.objc/blob/master/Persistent/Map/AABaseHashMap.h)
+
+It's also a port of [Clojure's PersistentHashMap](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/PersistentHashMap.java). It's a Hash Array Mapped Trie based data structure, just persistent and with some optimizations (transients) - the same optimizations Clojure's Hash Map has.
+
+Main methods are `get:(id)key`, `set:(id)key withValue:(id)value`, and `remove:(id)key`, allowing you to add, modify, read and delete keys and values from the map.
+Also, it has the `withTransient` method too, allowing to make bulk operations with the map faster.
+
+## Not really production ready
+
+These data structures are not really production ready, they are not thoroughly tested so far.
+
 ## Reading
 
 * [Why Persistent Data Structures are cool](https://github.com/vacuumlabs/persistent#got-it-and-it-is-cool-because)
 * [How Persistent Vectors work](http://hypirion.com/musings/understanding-persistent-vector-pt-1)
+* [How Persistent Hash Maps work](http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html)
 
 ## TODO
 
 * Improve NSFastEnumeration for AABaseVector
-* Add AAPersistentHashMap
+* Add NSFastEnumaration for AABaseHashMap
 * Add AAPersistentSet
 
