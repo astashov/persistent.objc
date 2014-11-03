@@ -6,12 +6,17 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
+#import "AAVNode.h"
+#import "AABitmapIndexedNode.h"
+#import "AAHashCollisionNode.h"
+#import "AABool.h"
+
 #ifndef Persistent_PrefixHeader_pch
 #define Persistent_PrefixHeader_pch
 
-static const int SHIFT = 5;
-static const int SIZE = 1 << SHIFT;
-static const int MASK = SIZE - 1;
+static const NSUInteger SHIFT = 5;
+static const NSUInteger SIZE = 1 << SHIFT;
+static const NSUInteger MASK = SIZE - 1;
 
 static AAVNode *maybeCopyVNode(AAVNode *node, AAOwner *owner) {
     if (owner != nil && node != nil && owner == node.owner) {
@@ -22,6 +27,57 @@ static AAVNode *maybeCopyVNode(AAVNode *node, AAOwner *owner) {
             andOwner: owner
         ];
     }
+}
+
+static NSUInteger mask(NSUInteger hash, NSUInteger shift) {
+    return (hash >> shift) & MASK;
+}
+
+static NSUInteger bitpos(NSUInteger hash, NSUInteger shift) {
+    return 1 << mask(hash, shift);
+}
+
+
+static id<AAINode> createNode(NSUInteger shift, id key1, id val1, id key2, id val2, AAOwner *owner) {
+    NSUInteger key1hash = [key1 hash];
+    NSUInteger key2hash = [key2 hash];
+    if (key1hash == key2hash) {
+        NSMutableArray *newArray = [[NSMutableArray alloc] initWithObjects:key1, val1, key2, val2, nil];
+        return [[AAHashCollisionNode alloc] initWithHash:key1hash count:2 array:newArray owner:owner];
+    } else {
+        AABool *didAddLeaf = [[AABool alloc] init];
+        return [[[AABitmapIndexedNode empty]
+                    set:key1 withValue:val1 shift:shift didAddLeaf:didAddLeaf owner:owner]
+                    set:key2 withValue:val2 shift:shift didAddLeaf:didAddLeaf owner:owner];
+
+    }
+}
+
+static NSString *ib(int intValue) {
+    int byteBlock = SHIFT,    // 8 bits per byte
+        totalBits = SIZE, // Total bits
+        binaryDigit = 1,  // Current masked bit
+        byteBlockShift = SIZE % SHIFT;
+
+    // Binary string
+    NSMutableString *binaryStr = [[NSMutableString alloc] init];
+
+    do
+    {
+        // Check next bit, shift contents left, append 0 or 1
+        [binaryStr insertString:((intValue & binaryDigit) ? @"1" : @"0" ) atIndex:0];
+
+        // More bits? On byte boundary ?
+        if (--totalBits && !((totalBits - byteBlockShift) % byteBlock))
+            [binaryStr insertString:@"|" atIndex:0];
+
+        // Move to next bit
+        binaryDigit <<= 1;
+
+    } while (totalBits);
+
+    // Return binary string
+    return binaryStr;
 }
 
 

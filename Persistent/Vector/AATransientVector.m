@@ -13,7 +13,7 @@
 -(instancetype)initWithSize:(NSUInteger)size level:(NSUInteger)level root:(AAVNode *)root tail:(AAVNode *)tail owner:(AAOwner *)owner {
     self = [self init];
     if (self) {
-        self.size = size;
+        self.count = size;
         self.level = level;
         self.root = root;
         self.tail = tail;

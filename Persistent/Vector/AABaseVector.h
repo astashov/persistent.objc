@@ -12,7 +12,7 @@
 @class AATransientVector;
 
 @interface AABaseVector : NSObject <NSFastEnumeration> {
-    NSUInteger _size;
+    NSUInteger _count;
     AAOwner *_owner;
     AAVNode *_root;
     AAVNode *_tail;
@@ -36,7 +36,9 @@
 // For debugging only :)
 -(NSString *)internals;
 
-@property(readonly, nonatomic) NSUInteger size;
+-(BOOL)isEqualToVector:(AABaseVector *)vector;
+
+@property(readonly, nonatomic) NSUInteger count;
 @property(readonly, nonatomic) NSUInteger hash;
 
 @end

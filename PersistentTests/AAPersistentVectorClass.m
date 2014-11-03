@@ -52,11 +52,11 @@
         for (int i = 0; i < 10; i += 1) { [tmp pop]; }
         return tmp;
     }];
-    XCTAssertEqual(v.size, 62);
+    XCTAssertEqual(v.count, 62);
     for (int i = 0; i < 62; i += 1) {
         XCTAssertEqual([v get:i], i == 50 ? @(123) : @(i));
     }
-    XCTAssertEqual(v.size, 62);
+    XCTAssertEqual(v.count, 62);
 }
 
 -(void)testImmutability {
@@ -77,30 +77,30 @@
     AAPersistentVector *e = [b pop];
     AAPersistentVector *f = [c set:10 withValue:@(2000)];
 
-    XCTAssertEqual(v.size, 0);
+    XCTAssertEqual(v.count, 0);
 
-    XCTAssertEqual(a.size, 100);
+    XCTAssertEqual(a.count, 100);
     for (int i = 0; i < 100; i += 1) {
         XCTAssertEqual([a get:i], @(i));
     }
 
-    XCTAssertEqual(b.size, 50);
+    XCTAssertEqual(b.count, 50);
     for (int i = 0; i < 50; i += 1) {
         XCTAssertEqual([b get:i], @(i));
     }
 
-    XCTAssertEqual(c.size, 50);
+    XCTAssertEqual(c.count, 50);
     for (int i = 0; i < 50; i += 1) {
         NSNumber *value = i < 25 ? @(i + 100) : @(i);
         XCTAssertEqual([c get:i], value);
     }
 
-    XCTAssertEqual(d.size, 101);
+    XCTAssertEqual(d.count, 101);
     XCTAssertEqual([d get:100], @(1000));
 
-    XCTAssertEqual(e.size, 49);
+    XCTAssertEqual(e.count, 49);
 
-    XCTAssertEqual(f.size, 50);
+    XCTAssertEqual(f.count, 50);
     XCTAssertEqual([f get:10], @(2000));
 }
 

@@ -23,7 +23,7 @@
         self.root = [[AAVNode alloc] initWithArray:[NSMutableArray array] andOwner:self.owner];
         self.tail = self.root;
         self.level = SHIFT;
-        self.size = 0;
+        self.count = 0;
         self.hash = 0;
     }
     return self;
@@ -32,7 +32,7 @@
 #pragma mark API
 
 -(id)get:(NSUInteger)index {
-    if (index > self.size - 1) {
+    if (index > self.count - 1) {
         return nil;
     } else {
         AAVNode *node = [self vectorNodeFor:index];
@@ -42,7 +42,7 @@
 }
 
 -(instancetype)set:(NSUInteger)index withValue:(id)value {
-    if (index < self.size) {
+    if (index < self.count) {
         AAVNode *newTail = self.tail;
         AAVNode *newRoot = self.root;
         AABool *didAlter = [[AABool alloc] init];
@@ -59,24 +59,24 @@
             self.altered = YES;
             return self;
         } else {
-            return [[AAPersistentVector alloc] initWithSize:self.size level:self.level root:newRoot tail:newTail];
+            return [[AAPersistentVector alloc] initWithSize:self.count level:self.level root:newRoot tail:newTail];
         }
     } else {
-        NSString *format = self.size == 0 ? @"empty vector" : [NSString stringWithFormat:@"[0 .. %lu]", self.size - 1];
+        NSString *format = self.count == 0 ? @"empty vector" : [NSString stringWithFormat:@"[0 .. %lu]", self.count - 1];
         [NSException raise:NSRangeException format:@"index %lu beyond bounds for %@", (unsigned long)index, format];
     }
     return nil;
 }
 
 -(instancetype)push:(id)value {
-    NSUInteger length = self.size;
+    NSUInteger length = self.count;
     return [self withTransient:^(AATransientVector *transient) {
         return [[transient increaseSize] set:length withValue:value];
     }];
 }
 
 -(instancetype)pop {
-    if (self.size > 0) {
+    if (self.count > 0) {
         return [self decreaseSize];
     } else {
         return self;
@@ -99,7 +99,7 @@
 
 -(NSArray *)asArray {
     NSMutableArray *a = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i < self.size; i += 1) {
+    for (NSUInteger i = 0; i < self.count; i += 1) {
         [a addObject:[self get:i]];
     }
     return [NSArray arrayWithArray:a];
@@ -125,9 +125,9 @@
         return self;
     } else if (!owner) {
         self.owner = owner;
-        return [[AAPersistentVector alloc] initWithSize:self.size level:self.level root:self.root tail:self.tail];
+        return [[AAPersistentVector alloc] initWithSize:self.count level:self.level root:self.root tail:self.tail];
     } else {
-        return [[AATransientVector alloc] initWithSize:self.size level:self.level root:self.root tail:self.tail owner:owner];
+        return [[AATransientVector alloc] initWithSize:self.count level:self.level root:self.root tail:self.tail owner:owner];
     }
 }
 
@@ -140,7 +140,7 @@
 }
 
 -(AABaseVector *)resize:(BOOL)isIncrease {
-    NSUInteger newSize = isIncrease ? self.size + 1 : self.size - 1;
+    NSUInteger newSize = isIncrease ? self.count + 1 : self.count - 1;
     AAOwner *owner = self.owner == nil ? nil : [[AAOwner alloc] init];
     NSUInteger oldTailOffset = [self tailOffset];
     NSUInteger newTailOffset = [self tailOffsetWithSize:newSize];
@@ -198,7 +198,7 @@
     }
 
     if (owner) {
-        self.size = newSize;
+        self.count = newSize;
         self.level = newLevel;
         self.root = newRoot;
         self.tail = newTail;
@@ -228,7 +228,7 @@
 }
 
 -(NSUInteger)tailOffset {
-    return [self tailOffsetWithSize:self.size];
+    return [self tailOffsetWithSize:self.count];
 }
 
 -(NSUInteger)tailOffsetWithSize:(NSUInteger)size {
@@ -239,7 +239,7 @@
                                  objects:(id __unsafe_unretained [])buffer
                                    count:(NSUInteger)len {
     if (state->state == 0) {
-        state->mutationsPtr = (unsigned long *)&_size;
+        state->mutationsPtr = (unsigned long *)&_count;
         state->state = 1;
         state->extra[0] = 0;
     }
@@ -262,20 +262,25 @@
 }
 
 -(BOOL)isEqual:(id)object {
-    if ([super isEqual:object]) {
+    return [super isEqual:object] ||
+        ([self class] == [object class] && [self isEqualToVector:(AABaseVector *)object]);
+}
+
+-(BOOL)isEqualToVector:(AABaseVector *)vector {
+    if ([super isEqual:vector]) {
         return true;
     }
-    if ([self class] != [object class]) {
+    if ([self class] != [vector class]) {
         return false;
     }
-    if (self.hash != ((AABaseVector *)object).hash) {
+    if (self.hash != ((AABaseVector *)vector).hash) {
         return false;
     }
-    if (self.size != ((AABaseVector *)object).size) {
+    if (self.count != ((AABaseVector *)vector).count) {
         return false;
     }
-    for (NSUInteger i = 0; i < self.size; i += 1) {
-        if ([self get:i] != [(AABaseVector *)object get:i]) {
+    for (NSUInteger i = 0; i < self.count; i += 1) {
+        if ([self get:i] != [vector get:i]) {
             return false;
         }
     }

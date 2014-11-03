@@ -22,7 +22,7 @@
 -(id)get:(NSUInteger)index;
 -(instancetype)removeAfter:(NSUInteger)newSize withOwner:(AAOwner *)owner;
 -(instancetype)update:(NSUInteger)index withValue:(id)value level:(NSUInteger)level owner:(AAOwner *)owner didAlter:(AABool *)didAlter;
--(void)compact;
+//-(void)compact;
 
 @property NSMutableArray *array;
 @property AAOwner *owner;
