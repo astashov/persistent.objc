@@ -17,6 +17,10 @@ It's also a port of [Clojure's PersistentHashMap](https://github.com/clojure/clo
 Main methods are `get:(id)key`, `set:(id)key withValue:(id)value`, and `remove:(id)key`, allowing you to add, modify, read and delete keys and values from the map.
 Also, it has the `withTransient` method too, allowing to make bulk operations with the map faster.
 
+### [Set](https://github.com/astashov/persistent.objc/blob/master/Persistent/Set/AAPersistentSet.h)
+
+It's just a proxy on top of `AAPersistentHashMap`, implementing set functionality on top of persistent hash map.
+
 ## Not really production ready
 
 These data structures are not really production ready, they are not thoroughly tested so far.
@@ -30,6 +34,7 @@ These data structures are not really production ready, they are not thoroughly t
 ## TODO
 
 * Improve NSFastEnumeration for AABaseVector
-* Add NSFastEnumaration for AABaseHashMap
-* Add AAPersistentSet
+* Add NSFastEnumeration for AABaseHashMap
+* Add NSFastEnumeration AAPersistentSet
+* Maybe replace [NSNull null] in AABaseHashMap by AANullNode
 

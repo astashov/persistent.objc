@@ -35,6 +35,8 @@
 
 -(void)each:(void(^)(id key, id value))block;
 
+-(BOOL)isEqualToHashMap:(AABaseHashMap *)hashMap;
+
 @property NSUInteger count;
 @property id<AAINode> root;
 @property AAOwner *owner;

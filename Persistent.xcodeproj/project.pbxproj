@@ -22,10 +22,6 @@
 		3A588BA219E055BB00746226 /* AABool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8619DFADAA00746226 /* AABool.m */; };
 		3A588BA319E055BB00746226 /* AATransientVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8919DFCB8500746226 /* AATransientVector.m */; };
 		3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */; };
-		3A588BAB19E1F32E00746226 /* AAPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BAA19E1F32E00746226 /* AAPair.m */; };
-		3A588BAC19E1F32E00746226 /* AAPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BAA19E1F32E00746226 /* AAPair.m */; };
-		3A588BB319E37E6C00746226 /* AAMNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BB219E37E6C00746226 /* AAMNode.m */; };
-		3A588BB419E37E6C00746226 /* AAMNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588BB219E37E6C00746226 /* AAMNode.m */; };
 		3AF8835C19FB7B7C00687633 /* AABitmapIndexedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8835B19FB7B7C00687633 /* AABitmapIndexedNode.m */; };
 		3AF8835F19FCB25A00687633 /* AAPersistentHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8835E19FCB25A00687633 /* AAPersistentHashMap.m */; };
 		3AF8836219FF60BA00687633 /* AAArrayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8836119FF60BA00687633 /* AAArrayNode.m */; };
@@ -39,6 +35,13 @@
 		3AF8836F1A06F04900687633 /* AABaseHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8836D1A069D5B00687633 /* AABaseHashMap.m */; };
 		3AF883721A06F08E00687633 /* AATransientHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883711A06F08E00687633 /* AATransientHashMap.m */; };
 		3AF883731A06F08E00687633 /* AATransientHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883711A06F08E00687633 /* AATransientHashMap.m */; };
+		3AF8837B1A080D6700687633 /* AAPersistentSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8837A1A080D6700687633 /* AAPersistentSet.m */; };
+		3AF8837C1A080D6700687633 /* AAPersistentSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8837A1A080D6700687633 /* AAPersistentSet.m */; };
+		3AF8837F1A08840000687633 /* AABaseSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8837E1A08840000687633 /* AABaseSet.m */; };
+		3AF883801A08840000687633 /* AABaseSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8837E1A08840000687633 /* AABaseSet.m */; };
+		3AF883831A08928200687633 /* AATransientSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883821A08928200687633 /* AATransientSet.m */; };
+		3AF883841A08928200687633 /* AATransientSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883821A08928200687633 /* AATransientSet.m */; };
+		3AF8838A1A0899B400687633 /* AAPersistentSetClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883891A0899B400687633 /* AAPersistentSetClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,10 +76,6 @@
 		3A588B9719DFD56500746226 /* PersistentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentTests.m; sourceTree = "<group>"; };
 		3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVectorClass.m; sourceTree = "<group>"; };
 		3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Persistent-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		3A588BA919E1F32E00746226 /* AAPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPair.h; sourceTree = "<group>"; };
-		3A588BAA19E1F32E00746226 /* AAPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPair.m; sourceTree = "<group>"; };
-		3A588BB119E37E6C00746226 /* AAMNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMNode.h; sourceTree = "<group>"; };
-		3A588BB219E37E6C00746226 /* AAMNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMNode.m; sourceTree = "<group>"; };
 		3AF8835619FA008B00687633 /* AABaseVectorPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseVectorPrivate.h; sourceTree = "<group>"; };
 		3AF8835719FB68BC00687633 /* AAINode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAINode.h; sourceTree = "<group>"; };
 		3AF8835A19FB7B7C00687633 /* AABitmapIndexedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABitmapIndexedNode.h; sourceTree = "<group>"; };
@@ -92,6 +91,13 @@
 		3AF8836D1A069D5B00687633 /* AABaseHashMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AABaseHashMap.m; sourceTree = "<group>"; };
 		3AF883701A06F08E00687633 /* AATransientHashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATransientHashMap.h; sourceTree = "<group>"; };
 		3AF883711A06F08E00687633 /* AATransientHashMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATransientHashMap.m; sourceTree = "<group>"; };
+		3AF883791A080D6700687633 /* AAPersistentSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPersistentSet.h; sourceTree = "<group>"; };
+		3AF8837A1A080D6700687633 /* AAPersistentSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentSet.m; sourceTree = "<group>"; };
+		3AF8837D1A08840000687633 /* AABaseSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseSet.h; sourceTree = "<group>"; };
+		3AF8837E1A08840000687633 /* AABaseSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AABaseSet.m; sourceTree = "<group>"; };
+		3AF883811A08928200687633 /* AATransientSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATransientSet.h; sourceTree = "<group>"; };
+		3AF883821A08928200687633 /* AATransientSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATransientSet.m; sourceTree = "<group>"; };
+		3AF883891A0899B400687633 /* AAPersistentSetClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentSetClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,7 @@
 		3A29EC4819DC5E0E006643CB /* Persistent */ = {
 			isa = PBXGroup;
 			children = (
+				3AF883741A080CFC00687633 /* Set */,
 				3A588BB619E38F1900746226 /* Map */,
 				3A588BB519E38F0700746226 /* Vector */,
 				3A29EC4919DC5E0E006643CB /* main.m */,
@@ -150,6 +157,7 @@
 			children = (
 				3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */,
 				3AF883661A00B4FA00687633 /* AAPersistentHashMapClass.m */,
+				3AF883891A0899B400687633 /* AAPersistentSetClass.m */,
 				3A588B9719DFD56500746226 /* PersistentTests.m */,
 				3A588B9519DFD56500746226 /* Supporting Files */,
 			);
@@ -183,10 +191,6 @@
 		3A588BB619E38F1900746226 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				3A588BA919E1F32E00746226 /* AAPair.h */,
-				3A588BAA19E1F32E00746226 /* AAPair.m */,
-				3A588BB119E37E6C00746226 /* AAMNode.h */,
-				3A588BB219E37E6C00746226 /* AAMNode.m */,
 				3AF8835719FB68BC00687633 /* AAINode.h */,
 				3AF8835A19FB7B7C00687633 /* AABitmapIndexedNode.h */,
 				3AF8835B19FB7B7C00687633 /* AABitmapIndexedNode.m */,
@@ -202,6 +206,19 @@
 				3AF883711A06F08E00687633 /* AATransientHashMap.m */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		3AF883741A080CFC00687633 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				3AF883791A080D6700687633 /* AAPersistentSet.h */,
+				3AF8837A1A080D6700687633 /* AAPersistentSet.m */,
+				3AF8837D1A08840000687633 /* AABaseSet.h */,
+				3AF8837E1A08840000687633 /* AABaseSet.m */,
+				3AF883811A08928200687633 /* AATransientSet.h */,
+				3AF883821A08928200687633 /* AATransientSet.m */,
+			);
+			path = Set;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,8 +309,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A29EC4A19DC5E0E006643CB /* main.m in Sources */,
+				3AF883831A08928200687633 /* AATransientSet.m in Sources */,
 				3AF8835F19FCB25A00687633 /* AAPersistentHashMap.m in Sources */,
-				3A588BAB19E1F32E00746226 /* AAPair.m in Sources */,
+				3AF8837F1A08840000687633 /* AABaseSet.m in Sources */,
 				3AF883721A06F08E00687633 /* AATransientHashMap.m in Sources */,
 				3AF8835C19FB7B7C00687633 /* AABitmapIndexedNode.m in Sources */,
 				3A588B8719DFADAA00746226 /* AABool.m in Sources */,
@@ -301,9 +319,9 @@
 				3A588B8A19DFCB8500746226 /* AATransientVector.m in Sources */,
 				3AF8836E1A069D5B00687633 /* AABaseHashMap.m in Sources */,
 				3AF8836219FF60BA00687633 /* AAArrayNode.m in Sources */,
+				3AF8837B1A080D6700687633 /* AAPersistentSet.m in Sources */,
 				3A588B8D19DFCC9F00746226 /* AAPersistentVector.m in Sources */,
 				3A29EC5A19DC7251006643CB /* AAVNode.m in Sources */,
-				3A588BB319E37E6C00746226 /* AAMNode.m in Sources */,
 				3AF883651A00AF9F00687633 /* AAHashCollisionNode.m in Sources */,
 				3A29EC5419DC5E58006643CB /* AABaseVector.m in Sources */,
 			);
@@ -314,19 +332,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A588B9F19E055B100746226 /* AABaseVector.m in Sources */,
-				3A588BB419E37E6C00746226 /* AAMNode.m in Sources */,
 				3AF883731A06F08E00687633 /* AATransientHashMap.m in Sources */,
 				3AF883681A00B5D300687633 /* AABitmapIndexedNode.m in Sources */,
+				3AF8838A1A0899B400687633 /* AAPersistentSetClass.m in Sources */,
 				3A588B9D19DFD58A00746226 /* AAPersistentVectorClass.m in Sources */,
 				3A588BA019E055BB00746226 /* AAVNode.m in Sources */,
 				3A588BA119E055BB00746226 /* AAOwner.m in Sources */,
 				3AF8836B1A00B5D300687633 /* AAHashCollisionNode.m in Sources */,
 				3A588B9819DFD56500746226 /* PersistentTests.m in Sources */,
 				3AF8836A1A00B5D300687633 /* AAArrayNode.m in Sources */,
+				3AF883841A08928200687633 /* AATransientSet.m in Sources */,
 				3AF8836F1A06F04900687633 /* AABaseHashMap.m in Sources */,
-				3A588BAC19E1F32E00746226 /* AAPair.m in Sources */,
 				3AF883691A00B5D300687633 /* AAPersistentHashMap.m in Sources */,
+				3AF8837C1A080D6700687633 /* AAPersistentSet.m in Sources */,
 				3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */,
+				3AF883801A08840000687633 /* AABaseSet.m in Sources */,
 				3A588BA319E055BB00746226 /* AATransientVector.m in Sources */,
 				3AF883671A00B4FA00687633 /* AAPersistentHashMapClass.m in Sources */,
 				3A588BA219E055BB00746226 /* AABool.m in Sources */,
