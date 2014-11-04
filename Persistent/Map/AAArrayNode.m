@@ -9,6 +9,7 @@
 #import "AAArrayNode.h"
 #import "AABitmapIndexedNode.h"
 #import "AAINode.h"
+#import "AANullNode.h"
 #import "AABool.h"
 #import "Persistent-Prefix.pch"
 
@@ -39,7 +40,7 @@
     NSUInteger idx = mask(hash, shift);
     id<AAINode> node = self.array[idx];
     if (node) {
-        if ([node isEqual:[NSNull null]]) {
+        if ([node isEqual:[AANullNode node]]) {
             return nil;
         } else {
             return [node get:key shift:shift + SHIFT];
@@ -53,7 +54,7 @@
     NSUInteger hash = [key hash];
     NSUInteger idx = mask(hash, shift);
     id<AAINode> node = self.array[idx];
-    if ([node isEqual:[NSNull null]]) {
+    if ([node isEqual:[AANullNode node]]) {
         id<AAINode> newNode = [[AABitmapIndexedNode empty] set:key withValue:value shift:shift + SHIFT didAddLeaf:didAddLeaf owner:owner];
         AAArrayNode *owned = [self ensureOwned:owner];
         owned.array[idx] = newNode;
@@ -75,13 +76,13 @@
     NSUInteger hash = [key hash];
     NSUInteger idx = mask(hash, shift);
     id<AAINode> node = self.array[idx];
-    if ([node isEqual:[NSNull null]]) {
+    if ([node isEqual:[AANullNode node]]) {
         return self;
     } else {
         id<AAINode> n = [node remove:key shift:shift + SHIFT didRemoveLeaf:didRemoveLeaf owner:owner];
         if ([n isEqual:node]) {
             return self;
-        } else if ([n isEqual:[NSNull null]]) {
+        } else if ([n isEqual:[AANullNode node]]) {
             if (self.count <= SIZE / 4) {
                 return [self pack:idx owner:owner];
             } else {
@@ -93,7 +94,7 @@
         } else {
             AAArrayNode *owned = [self ensureOwned:owner];
             if ([n isEmpty]) {
-                owned.array[idx] = [NSNull null];
+                owned.array[idx] = [AANullNode node];
                 owned.count -= 1;
             } else {
                 owned.array[idx] = n;
@@ -121,7 +122,7 @@
     NSUInteger j = 1;
     NSUInteger bitmap = 0;
     for (NSUInteger i = 0; i < [self.array count]; i += 1) {
-        if (![self.array[i] isEqual:[NSNull null]]) {
+        if (![self.array[i] isEqual:[AANullNode node]]) {
             newArray[j] = self.array[i];
             bitmap |= (1 << i);
             j += 2;
@@ -137,8 +138,8 @@
     NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:2 * self.count];
     NSUInteger bitmap = 0;
     for (NSUInteger i = 0; i < [self.array count]; i += 1) {
-        if (![self.array[i] isEqual:[NSNull null]]) {
-            [newArray addObject:[NSNull null]];
+        if (![self.array[i] isEqual:[AANullNode node]]) {
+            [newArray addObject:[AANullNode node]];
             [newArray addObject:self.array[i]];
             bitmap |= (1 << i);
         }
@@ -149,7 +150,7 @@
 -(void)each:(void(^)(id, id))block {
     for (NSUInteger i = 0; i < [self.array count]; i += 1) {
         id value = self.array[i];
-        if (![value isEqual:[NSNull null]]) {
+        if (![value isEqual:[AANullNode node]]) {
             [(id<AAINode>)value each:block];
         }
     }

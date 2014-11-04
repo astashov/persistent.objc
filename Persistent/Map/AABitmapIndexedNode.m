@@ -10,6 +10,7 @@
 #import "AAArrayNode.h"
 #import "AAINode.h"
 #import "AABool.h"
+#import "AANullNode.h"
 #import "Persistent-Prefix.pch"
 
 @interface AABitmapIndexedNode ()
@@ -55,7 +56,7 @@
         NSUInteger idx = [self index:bit];
         id keyOrNull = self.array[2 * idx];
         id valOrNode = self.array[2 * idx + 1];
-        if ([keyOrNull isEqual:[NSNull null]]) {
+        if ([keyOrNull isEqual:[AANullNode node]]) {
             return [(id<AAINode>)valOrNode get:key shift:shift + SHIFT];
         } else if ([key isEqual:keyOrNull]) {
             return valOrNode;
@@ -74,7 +75,7 @@
     if ((self.bitmap & bit) != 0) {
         id keyOrNull = self.array[2 * idx];
         id valOrNode = self.array[2 * idx + 1];
-        if ([keyOrNull isEqual:[NSNull null]]) {
+        if ([keyOrNull isEqual:[AANullNode node]]) {
             id<AAINode> n = [(id<AAINode>)valOrNode set:key withValue:value shift:shift + SHIFT didAddLeaf:didAddLeaf owner:owner];
             if ([n isEqual:valOrNode]) {
                 return self;
@@ -94,7 +95,7 @@
         } else {
             didAddLeaf.value = YES;
             AABitmapIndexedNode *owned = [self ensureOwned:owner];
-            owned.array[2 * idx] = [NSNull null];
+            owned.array[2 * idx] = [AANullNode node];
             owned.array[2 * idx + 1] = createNode(shift + SHIFT, keyOrNull, valOrNode, key, value, owner);
             return owned;
 
@@ -109,10 +110,10 @@
                 if (i == jdx) {
                     nodes[jdx] = [[AABitmapIndexedNode empty] set:key withValue:value shift:shift + SHIFT didAddLeaf:didAddLeaf owner:owner];
                 } else {
-                    nodes[i] = [NSNull null];
+                    nodes[i] = [AANullNode node];
                 }
                 if (((self.bitmap >> i) & 1) != 0) {
-                    if ([self.array[j] isEqual:[NSNull null]]) {
+                    if ([self.array[j] isEqual:[AANullNode node]]) {
                         nodes[i] = self.array[j + 1];
                     } else {
                         nodes[i] = [[AABitmapIndexedNode empty]
@@ -149,11 +150,11 @@
         NSUInteger idx = [self index:bit];
         id keyOrNull = self.array[2 * idx];
         id valOrNode = self.array[2 * idx + 1];
-        if ([keyOrNull isEqual:[NSNull null]]) {
+        if ([keyOrNull isEqual:[AANullNode node]]) {
             id<AAINode> n = [(id<AAINode>)valOrNode remove:key shift:shift + SHIFT didRemoveLeaf:didRemoveLeaf owner:owner];
             if ([n isEqual:valOrNode]) {
                 return self;
-            } else if (![n isEqual:[NSNull null]]) {
+            } else if (![n isEqual:[AANullNode node]]) {
                 AABitmapIndexedNode *owned = [self ensureOwned:owner];
                 if ([n isEmpty]) {
                     owned.bitmap ^= bit;
@@ -193,7 +194,7 @@
     for (NSUInteger i = 0; i < [self.array count]; i += 2) {
         id keyOrNull = self.array[i];
         id valOrNode = self.array[i + 1];
-        if ([keyOrNull isEqual:[NSNull null]]) {
+        if ([keyOrNull isEqual:[AANullNode node]]) {
             [valOrNode each:block];
         } else {
             block(keyOrNull, valOrNode);

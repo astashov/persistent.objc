@@ -42,6 +42,8 @@
 		3AF883831A08928200687633 /* AATransientSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883821A08928200687633 /* AATransientSet.m */; };
 		3AF883841A08928200687633 /* AATransientSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883821A08928200687633 /* AATransientSet.m */; };
 		3AF8838A1A0899B400687633 /* AAPersistentSetClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF883891A0899B400687633 /* AAPersistentSetClass.m */; };
+		3AF8838D1A08BC5600687633 /* AANullNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8838C1A08BC5600687633 /* AANullNode.m */; };
+		3AF8838E1A08BC5600687633 /* AANullNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8838C1A08BC5600687633 /* AANullNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,6 +100,8 @@
 		3AF883811A08928200687633 /* AATransientSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATransientSet.h; sourceTree = "<group>"; };
 		3AF883821A08928200687633 /* AATransientSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATransientSet.m; sourceTree = "<group>"; };
 		3AF883891A0899B400687633 /* AAPersistentSetClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentSetClass.m; sourceTree = "<group>"; };
+		3AF8838B1A08BC5600687633 /* AANullNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AANullNode.h; sourceTree = "<group>"; };
+		3AF8838C1A08BC5600687633 /* AANullNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AANullNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,8 @@
 				3AF8836D1A069D5B00687633 /* AABaseHashMap.m */,
 				3AF883701A06F08E00687633 /* AATransientHashMap.h */,
 				3AF883711A06F08E00687633 /* AATransientHashMap.m */,
+				3AF8838B1A08BC5600687633 /* AANullNode.h */,
+				3AF8838C1A08BC5600687633 /* AANullNode.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 				3AF8835C19FB7B7C00687633 /* AABitmapIndexedNode.m in Sources */,
 				3A588B8719DFADAA00746226 /* AABool.m in Sources */,
 				3A29EC5E19DC72F0006643CB /* AAOwner.m in Sources */,
+				3AF8838D1A08BC5600687633 /* AANullNode.m in Sources */,
 				3A588B8A19DFCB8500746226 /* AATransientVector.m in Sources */,
 				3AF8836E1A069D5B00687633 /* AABaseHashMap.m in Sources */,
 				3AF8836219FF60BA00687633 /* AAArrayNode.m in Sources */,
@@ -345,6 +352,7 @@
 				3AF8836F1A06F04900687633 /* AABaseHashMap.m in Sources */,
 				3AF883691A00B5D300687633 /* AAPersistentHashMap.m in Sources */,
 				3AF8837C1A080D6700687633 /* AAPersistentSet.m in Sources */,
+				3AF8838E1A08BC5600687633 /* AANullNode.m in Sources */,
 				3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */,
 				3AF883801A08840000687633 /* AABaseSet.m in Sources */,
 				3A588BA319E055BB00746226 /* AATransientVector.m in Sources */,

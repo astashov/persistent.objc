@@ -36,5 +36,4 @@ These data structures are not really production ready, they are not thoroughly t
 * Improve NSFastEnumeration for AABaseVector
 * Add NSFastEnumeration for AABaseHashMap
 * Add NSFastEnumeration AAPersistentSet
-* Maybe replace [NSNull null] in AABaseHashMap by AANullNode
 

@@ -10,6 +10,7 @@
 #import "AATransientVector.h"
 #import "AAPersistentVector.h"
 #import "AAVNode.h"
+#import "AANullNode.h"
 #import "Persistent-Prefix.pch"
 #import "AABool.h"
 #import "AAOwner.h"
@@ -111,7 +112,7 @@
 
 -(NSString *)internals {
     NSMutableDictionary *a = [[NSMutableDictionary alloc] init];
-    a[@"owner"] = self.owner ?: [NSNull null];
+    a[@"owner"] = self.owner ?: [AANullNode node];
     a[@"root"] = self.root;
     a[@"tail"] = self.tail;
     a[@"level"] = @(self.level);

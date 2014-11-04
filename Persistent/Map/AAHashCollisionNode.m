@@ -8,6 +8,7 @@
 
 #import "AAHashCollisionNode.h"
 #import "AABitmapIndexedNode.h"
+#import "AANullNode.h"
 #import "AABool.h"
 #import "AAOwner.h"
 #import "Persistent-Prefix.pch"
@@ -75,7 +76,7 @@
             return node;
         }
     } else {
-        NSMutableArray *newArray = [NSMutableArray arrayWithObjects:[NSNull null], self, [NSNull null], [NSNull null], nil];
+        NSMutableArray *newArray = [NSMutableArray arrayWithObjects:[AANullNode node], self, [AANullNode node], [AANullNode node], nil];
         AABitmapIndexedNode *node = [[AABitmapIndexedNode alloc] initWithBitmap:bitpos(_hash, shift) array:newArray owner:owner];
         return [node set:key withValue:value shift:shift didAddLeaf:didAddLeaf owner:owner];
     }
