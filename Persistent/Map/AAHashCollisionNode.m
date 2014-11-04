@@ -13,6 +13,8 @@
 #import "AAOwner.h"
 #import "Persistent-Prefix.pch"
 
+static const NSUInteger notFound = -1;
+
 @implementation AAHashCollisionNode
 
 -(instancetype)initWithHash:(NSUInteger)hash count:(NSUInteger)count array:(NSMutableArray *)array owner:(AAOwner *)owner {
@@ -32,7 +34,7 @@
 
 -(id)get:(id)key shift:(NSUInteger)shift {
     NSUInteger idx = [self findIndex:key];
-    if (idx != -1 && [key isEqual:self.array[idx]]) {
+    if (idx != notFound && [key isEqual:self.array[idx]]) {
         return self.array[idx + 1];
     } else {
         return nil;
@@ -41,7 +43,7 @@
 
 -(id<AAINode>)remove:(id)key shift:(NSUInteger)shift didRemoveLeaf:(AABool *)didRemoveLeaf owner:(AAOwner *)owner {
     NSUInteger idx = [self findIndex:key];
-    if (idx == -1) {
+    if (idx == notFound) {
         return self;
     } else {
         didRemoveLeaf.value = YES;
@@ -61,7 +63,7 @@
     if ([key hash] == _hash) {
         NSUInteger idx = [self findIndex:key];
         AAHashCollisionNode *node = [self ensureOwned:owner];
-        if (idx != -1) {
+        if (idx != notFound) {
             if ([value isEqual:self.array[idx + 1]]) {
                 return self;
             } else {
@@ -88,7 +90,7 @@
             return i;
         }
     }
-    return -1;
+    return notFound;
 }
 
 -(instancetype)ensureOwned:(AAOwner *)owner {
