@@ -37,4 +37,6 @@ These data structures are not really production ready, they are not thoroughly t
 * Add NSFastEnumeration for AABaseHashMap
 * Add NSFastEnumeration AAPersistentSet
 * Add tests for AAHashCollisionNode (i.e. add hash-collisioned keys into hash map)
+* Add methods for initializing collections from NSArray, NSDictionary and NSSet
+* Add methods for converting collections to NSArray, NSDictionary and NSSet
 
