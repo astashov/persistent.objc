@@ -24,15 +24,15 @@
 }
 
 -(instancetype)addObject:(id)anObject {
-    return [[[self class] alloc] initWithHashMap:[self.hashMap set:anObject withValue:anObject]];
+    return [[[self class] alloc] initWithHashMap:[self.hashMap setObject:anObject forKey:anObject]];
 }
 
 -(instancetype)removeObject:(id)anObject {
-    return [[[self class] alloc] initWithHashMap:[self.hashMap remove:anObject]];
+    return [[[self class] alloc] initWithHashMap:[self.hashMap removeObjectForKey:anObject]];
 }
 
 -(BOOL)containsObject:(id)anObject {
-    return !![self.hashMap get:anObject];
+    return !![self.hashMap objectForKey:anObject];
 }
 
 -(void)each:(void(^)(id))block {

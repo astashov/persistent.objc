@@ -23,9 +23,9 @@
 +(instancetype)empty;
 -(instancetype)initWithCount:(NSUInteger)count root:(id<AAINode>)root;
 
--(id)get:(id)key;
--(instancetype)set:(id)key withValue:(id)value;
--(instancetype)remove:(id)key;
+-(id)objectForKey:(id)key;
+-(instancetype)setObject:(id)key forKey:(id)value;
+-(instancetype)removeObjectForKey:(id)key;
 
 -(NSString *)internals;
 

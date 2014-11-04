@@ -31,7 +31,7 @@
 
 #pragma mark API
 
--(id)get:(NSUInteger)index {
+-(id)objectAtIndex:(NSUInteger)index {
     if (index > self.count - 1) {
         return nil;
     } else {
@@ -41,7 +41,7 @@
     }
 }
 
--(instancetype)set:(NSUInteger)index withValue:(id)value {
+-(instancetype)replaceObjectAtIndex:(NSUInteger)index withObject:(id)value {
     if (index < self.count) {
         AAVNode *newTail = self.tail;
         AAVNode *newRoot = self.root;
@@ -68,14 +68,14 @@
     return nil;
 }
 
--(instancetype)push:(id)value {
+-(instancetype)addObject:(id)value {
     NSUInteger length = self.count;
     return [self withTransient:^(AATransientVector *transient) {
-        return [[transient increaseSize] set:length withValue:value];
+        return [[transient increaseSize] replaceObjectAtIndex:length withObject:value];
     }];
 }
 
--(instancetype)pop {
+-(instancetype)removeLastObject {
     if (self.count > 0) {
         return [self decreaseSize];
     } else {
@@ -100,7 +100,7 @@
 -(NSArray *)asArray {
     NSMutableArray *a = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < self.count; i += 1) {
-        [a addObject:[self get:i]];
+        [a addObject:[self objectAtIndex:i]];
     }
     return [NSArray arrayWithArray:a];
 }
@@ -243,12 +243,12 @@
         state->state = 1;
         state->extra[0] = 0;
     }
-    id __unsafe_unretained value = [self get:state->extra[0]];
+    id __unsafe_unretained value = [self objectAtIndex:state->extra[0]];
     NSUInteger i;
     for (i = 0; i < len && value != nil; i += 1) {
         buffer[i] = value;
         state->extra[0] += 1;
-        value = [self get:state->extra[0]];
+        value = [self objectAtIndex:state->extra[0]];
     }
     state->itemsPtr = buffer;
     return i;
@@ -280,7 +280,7 @@
         return false;
     }
     for (NSUInteger i = 0; i < self.count; i += 1) {
-        if ([self get:i] != [vector get:i]) {
+        if ([self objectAtIndex:i] != [vector objectAtIndex:i]) {
             return false;
         }
     }

@@ -21,11 +21,11 @@
     NSUInteger _hash;
 }
 
--(id)get:(NSUInteger)index;
--(instancetype)set:(NSUInteger)index withValue:(id)value;
+-(id)objectAtIndex:(NSUInteger)index;
+-(instancetype)replaceObjectAtIndex:(NSUInteger)index withObject:(id)value;
 
--(instancetype)push:(id)value;
--(instancetype)pop;
+-(instancetype)addObject:(id)value;
+-(instancetype)removeLastObject;
 
 -(AABaseVector *)asTransient;
 -(AABaseVector *)asPersistent;

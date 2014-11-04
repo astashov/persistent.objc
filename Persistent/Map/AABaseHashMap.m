@@ -37,11 +37,11 @@
 
 #pragma mark API
 
--(id)get:(id)key {
+-(id)objectForKey:(id)key {
     return [self.root get:key shift:0];
 }
 
--(instancetype)set:(id)key withValue:(id)value {
+-(instancetype)setObject:(id)value forKey:(id)key {
     AABool *didAddLeaf = [[AABool alloc] init];
     id<AAINode> newRoot = [self.root set:key withValue:value shift:0 didAddLeaf:didAddLeaf owner:self.owner];
     if (!self.owner && self.root == newRoot) {
@@ -58,7 +58,7 @@
     }
 }
 
--(instancetype)remove:(id)key {
+-(instancetype)removeObjectForKey:(id)key {
     AABool *didRemoveLeaf = [[AABool alloc] init];
     id<AAINode> newRoot = [self.root remove:key shift:0 didRemoveLeaf:didRemoveLeaf owner:self.owner];
     if (!self.owner && self.root == newRoot) {
@@ -125,7 +125,7 @@
     }
     __block BOOL result = YES;
     [self each:^(id key, id value) {
-        result = result && [[self get:key] isEqual:[hashMap get:key]];
+        result = result && [[self objectForKey:key] isEqual:[hashMap objectForKey:key]];
     }];
     return result;
 }

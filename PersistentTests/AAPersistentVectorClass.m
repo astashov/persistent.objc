@@ -18,28 +18,28 @@
 
 -(void)testPushPop {
     AAPersistentVector *v = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 72; i += 1) { v = [v push:@(i)]; }
-    for (int i = 0; i < 67; i += 1) { v = [v pop]; }
-    for (int i = 0; i < 70; i += 1) { v = [v push:@(i)]; }
-    for (int i = 0; i < 65; i += 1) { v = [v pop]; }
+    for (int i = 0; i < 72; i += 1) { v = [v addObject:@(i)]; }
+    for (int i = 0; i < 67; i += 1) { v = [v removeLastObject]; }
+    for (int i = 0; i < 70; i += 1) { v = [v addObject:@(i)]; }
+    for (int i = 0; i < 65; i += 1) { v = [v removeLastObject]; }
     NSArray *expected = @[@(0), @(1), @(2), @(3), @(4), @(0), @(1), @(2), @(3), @(4)];
     XCTAssertEqualObjects([v asArray], expected);
 }
 
 -(void)testGet {
     AAPersistentVector *v = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 72; i += 1) { v = [v push:@(i)]; }
+    for (int i = 0; i < 72; i += 1) { v = [v addObject:@(i)]; }
     for (int i = 0; i < 72; i += 1) {
-        XCTAssertEqualObjects([v get:i], @(i));
+        XCTAssertEqualObjects([v objectAtIndex:i], @(i));
     }
 }
 
 -(void)testSet {
     AAPersistentVector *v = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 72; i += 1) { v = [v push:@(i)]; }
-    v = [v set:37 withValue:@(100500)];
+    for (int i = 0; i < 72; i += 1) { v = [v addObject:@(i)]; }
+    v = [v replaceObjectAtIndex:37 withObject:@(100500)];
     for (int i = 0; i < 72; i += 1) {
-        XCTAssertEqualObjects([v get:i], i == 37 ? @(100500) : @(i));
+        XCTAssertEqualObjects([v objectAtIndex:i], i == 37 ? @(100500) : @(i));
     }
 }
 
@@ -47,14 +47,14 @@
     AAPersistentVector *v = [[AAPersistentVector alloc] init];
     v = (AAPersistentVector *)[v withTransient:^(AATransientVector *transient) {
         AATransientVector* tmp = transient;
-        for (int i = 0; i < 72; i += 1) { [tmp push:@(i)]; }
-        [tmp set:50 withValue:@(123)];
-        for (int i = 0; i < 10; i += 1) { [tmp pop]; }
+        for (int i = 0; i < 72; i += 1) { [tmp addObject:@(i)]; }
+        [tmp replaceObjectAtIndex:50 withObject:@(123)];
+        for (int i = 0; i < 10; i += 1) { [tmp removeLastObject]; }
         return tmp;
     }];
     XCTAssertEqual(v.count, 62);
     for (int i = 0; i < 62; i += 1) {
-        XCTAssertEqual([v get:i], i == 50 ? @(123) : @(i));
+        XCTAssertEqual([v objectAtIndex:i], i == 50 ? @(123) : @(i));
     }
     XCTAssertEqual(v.count, 62);
 }
@@ -62,68 +62,68 @@
 -(void)testImmutability {
     AAPersistentVector *v = [[AAPersistentVector alloc] init];
     AAPersistentVector *a = (AAPersistentVector *)[v withTransient:^(AATransientVector *transient) {
-        for (int i = 0; i < 100; i += 1) { [transient push:@(i)]; }
+        for (int i = 0; i < 100; i += 1) { [transient addObject:@(i)]; }
         return transient;
     }];
     AAPersistentVector *b = (AAPersistentVector *)[a withTransient:^(AATransientVector *transient) {
-        for (int i = 0; i < 50; i += 1) { [transient pop]; }
+        for (int i = 0; i < 50; i += 1) { [transient removeLastObject]; }
         return transient;
     }];
     AAPersistentVector *c = (AAPersistentVector *)[b withTransient:^(AATransientVector *transient) {
-        for (int i = 0; i < 25; i += 1) { [transient set:i withValue:@(i + 100)]; }
+        for (int i = 0; i < 25; i += 1) { [transient replaceObjectAtIndex:i withObject:@(i + 100)]; }
         return transient;
     }];
-    AAPersistentVector *d = [a push:@(1000)];
-    AAPersistentVector *e = [b pop];
-    AAPersistentVector *f = [c set:10 withValue:@(2000)];
+    AAPersistentVector *d = [a addObject:@(1000)];
+    AAPersistentVector *e = [b removeLastObject];
+    AAPersistentVector *f = [c replaceObjectAtIndex:10 withObject:@(2000)];
 
     XCTAssertEqual(v.count, 0);
 
     XCTAssertEqual(a.count, 100);
     for (int i = 0; i < 100; i += 1) {
-        XCTAssertEqual([a get:i], @(i));
+        XCTAssertEqual([a objectAtIndex:i], @(i));
     }
 
     XCTAssertEqual(b.count, 50);
     for (int i = 0; i < 50; i += 1) {
-        XCTAssertEqual([b get:i], @(i));
+        XCTAssertEqual([b objectAtIndex:i], @(i));
     }
 
     XCTAssertEqual(c.count, 50);
     for (int i = 0; i < 50; i += 1) {
         NSNumber *value = i < 25 ? @(i + 100) : @(i);
-        XCTAssertEqual([c get:i], value);
+        XCTAssertEqual([c objectAtIndex:i], value);
     }
 
     XCTAssertEqual(d.count, 101);
-    XCTAssertEqual([d get:100], @(1000));
+    XCTAssertEqual([d objectAtIndex:100], @(1000));
 
     XCTAssertEqual(e.count, 49);
 
     XCTAssertEqual(f.count, 50);
-    XCTAssertEqual([f get:10], @(2000));
+    XCTAssertEqual([f objectAtIndex:10], @(2000));
 }
 
 -(void)testFastEnumeration {
     AAPersistentVector *v = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 100; i += 1) { v = [v push:@(i)]; }
+    for (int i = 0; i < 100; i += 1) { v = [v addObject:@(i)]; }
 
     NSUInteger i = 0;
     for (id value in v) {
-        XCTAssertEqual(value, [v get:i]);
+        XCTAssertEqual(value, [v objectAtIndex:i]);
         i += 1;
     }
 }
 
 -(void)testEquality {
     AAPersistentVector *a = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 100; i += 1) { a = [a push:@(i)]; }
+    for (int i = 0; i < 100; i += 1) { a = [a addObject:@(i)]; }
 
     AAPersistentVector *b = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 100; i += 1) { b = [b push:@(i)]; }
+    for (int i = 0; i < 100; i += 1) { b = [b addObject:@(i)]; }
 
     AAPersistentVector *c = [[AAPersistentVector alloc] init];
-    for (int i = 0; i < 99; i += 1) { c = [c push:@(i)]; }
+    for (int i = 0; i < 99; i += 1) { c = [c addObject:@(i)]; }
 
     XCTAssertEqualObjects(a, a);
     XCTAssertEqualObjects(a, b);

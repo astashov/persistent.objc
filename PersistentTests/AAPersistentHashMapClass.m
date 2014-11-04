@@ -27,27 +27,27 @@ static NSString *bar(NSUInteger i) {
 
 -(void)testSet {
     AAPersistentHashMap *v = [AAPersistentHashMap empty];
-    for (int i = 0; i < 72; i += 1) { v = [v set:foo(i) withValue:bar(i)]; }
+    for (int i = 0; i < 72; i += 1) { v = [v setObject:bar(i) forKey:foo(i)]; }
     for (int i = 0; i < 72; i += 1) {
-        XCTAssertEqualObjects([v get:foo(i)], bar(i));
+        XCTAssertEqualObjects([v objectForKey:foo(i)], bar(i));
     }
 }
 
 -(void)testRemove {
     AAPersistentHashMap *v = [AAPersistentHashMap empty];
-    for (int i = 0; i < 72; i += 1) { v = [v set:foo(i) withValue:bar(i)]; }
-    for (int i = 20; i < 32; i += 1) { v = [v remove:foo(i)]; }
+    for (int i = 0; i < 72; i += 1) { v = [v setObject:bar(i) forKey:foo(i)]; }
+    for (int i = 20; i < 32; i += 1) { v = [v removeObjectForKey:foo(i)]; }
     for (int i = 0; i < 72; i += 1) {
-        XCTAssertEqualObjects([v get:foo(i)], (i >= 20 && i < 32) ? nil : bar(i));
+        XCTAssertEqualObjects([v objectForKey:foo(i)], (i >= 20 && i < 32) ? nil : bar(i));
     }
 }
 
 -(void)testAsTransient {
     AAPersistentHashMap *v = [AAPersistentHashMap empty];
     v = (AAPersistentHashMap *)[v withTransient:^(AATransientHashMap *transient) {
-        for (int i = 0; i < 72; i += 1) { [transient set:foo(i) withValue:bar(i)]; }
-        [transient set:@"foo50" withValue:@"bar123"];
-        for (int i = 0; i < 10; i += 1) { [transient remove:foo(i)]; }
+        for (int i = 0; i < 72; i += 1) { [transient setObject:bar(i) forKey:foo(i)]; }
+        [transient setObject:@"bar123" forKey:@"foo50"];
+        for (int i = 0; i < 10; i += 1) { [transient removeObjectForKey:foo(i)]; }
         return transient;
     }];
     for (int i = 0; i < 72; i += 1) {
@@ -59,7 +59,7 @@ static NSString *bar(NSUInteger i) {
         } else {
             val = bar(i);
         }
-        XCTAssertEqualObjects([v get:foo(i)], val);
+        XCTAssertEqualObjects([v objectForKey:foo(i)], val);
     }
     XCTAssertEqual(v.count, 62);
 }
@@ -67,31 +67,31 @@ static NSString *bar(NSUInteger i) {
 -(void)testImmutability {
     AAPersistentHashMap *v = [AAPersistentHashMap empty];
     AAPersistentHashMap *a = (AAPersistentHashMap *)[v withTransient:^(AATransientHashMap *transient) {
-        for (int i = 0; i < 100; i += 1) { [transient set:foo(i) withValue:bar(i)]; }
+        for (int i = 0; i < 100; i += 1) { [transient setObject:bar(i) forKey:foo(i)]; }
         return transient;
     }];
     AAPersistentHashMap *b = (AAPersistentHashMap *)[a withTransient:^(AATransientHashMap *transient) {
-        for (int i = 0; i < 50; i += 1) { [transient remove:foo(i)]; }
+        for (int i = 0; i < 50; i += 1) { [transient removeObjectForKey:foo(i)]; }
         return transient;
     }];
     AAPersistentHashMap *c = (AAPersistentHashMap *)[b withTransient:^(AATransientHashMap *transient) {
-        for (int i = 0; i < 25; i += 1) { [transient set:foo(i) withValue:bar(i + 100)]; }
+        for (int i = 0; i < 25; i += 1) { [transient setObject:bar(i + 100) forKey:foo(i)]; }
         return transient;
     }];
-    AAPersistentHashMap *d = [a set:foo(1000) withValue:bar(1000)];
-    AAPersistentHashMap *e = [b remove:foo(25)];
-    AAPersistentHashMap *f = [c set:foo(10) withValue:bar(2000)];
+    AAPersistentHashMap *d = [a setObject:bar(1000) forKey:foo(1000)];
+    AAPersistentHashMap *e = [b removeObjectForKey:foo(25)];
+    AAPersistentHashMap *f = [c setObject:bar(2000) forKey:foo(10)];
 
     XCTAssertEqual(v.count, 0);
 
     XCTAssertEqual(a.count, 100);
     for (int i = 0; i < 100; i += 1) {
-        XCTAssertEqualObjects([a get:foo(i)], bar(i));
+        XCTAssertEqualObjects([a objectForKey:foo(i)], bar(i));
     }
 
     XCTAssertEqual(b.count, 50);
     for (int i = 0; i < 100; i += 1) {
-        XCTAssertEqualObjects([b get:foo(i)], i < 50 ? nil : bar(i));
+        XCTAssertEqualObjects([b objectForKey:foo(i)], i < 50 ? nil : bar(i));
     }
 
     XCTAssertEqual(c.count, 75);
@@ -104,28 +104,28 @@ static NSString *bar(NSUInteger i) {
         } else {
             val = bar(i);
         }
-        XCTAssertEqualObjects([c get:foo(i)], val);
+        XCTAssertEqualObjects([c objectForKey:foo(i)], val);
     }
 
     XCTAssertEqual(d.count, 101);
-    XCTAssertEqualObjects([d get:foo(1000)], bar(1000));
+    XCTAssertEqualObjects([d objectForKey:foo(1000)], bar(1000));
 
     XCTAssertEqual(e.count, 50);
-    XCTAssertEqualObjects([e get:foo(25)], nil);
+    XCTAssertEqualObjects([e objectForKey:foo(25)], nil);
 
     XCTAssertEqual(f.count, 75);
-    XCTAssertEqualObjects([f get:foo(10)], bar(2000));
+    XCTAssertEqualObjects([f objectForKey:foo(10)], bar(2000));
 }
 
 -(void)testEquality {
     AAPersistentHashMap *a = [AAPersistentHashMap empty];
-    for (int i = 0; i < 100; i += 1) { a = [a set:foo(i) withValue:bar(i)]; }
+    for (int i = 0; i < 100; i += 1) { a = [a setObject:bar(i) forKey:foo(i)]; }
 
     AAPersistentHashMap *b = [AAPersistentHashMap empty];
-    for (int i = 0; i < 100; i += 1) { b = [b set:foo(i) withValue:bar(i)]; }
+    for (int i = 0; i < 100; i += 1) { b = [b setObject:bar(i) forKey:foo(i)]; }
 
     AAPersistentHashMap *c = [AAPersistentHashMap empty];
-    for (int i = 0; i < 99; i += 1) { c = [c set:foo(i) withValue:bar(i)]; }
+    for (int i = 0; i < 99; i += 1) { c = [c setObject:bar(i) forKey:foo(i)]; }
 
     XCTAssertEqualObjects(a, a);
     XCTAssertEqualObjects(a, b);
