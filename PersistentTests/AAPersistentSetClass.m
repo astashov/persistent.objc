@@ -109,4 +109,17 @@
     XCTAssertNotEqualObjects(a, c);
 }
 
+-(void)testFastEnumeration {
+    AAPersistentSet *a = [AAPersistentSet empty];
+    for (int i = 0; i < 100; i += 1) { a = [a addObject:@(i)]; }
+
+    NSMutableSet *d = [[NSMutableSet alloc] init];
+    for (id b in a) {
+        [d addObject:b];
+    }
+    for (int i = 0; i < 100; i += 1) {
+        XCTAssert([a containsObject:@(i)]);
+    }
+}
+
 @end

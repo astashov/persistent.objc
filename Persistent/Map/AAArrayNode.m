@@ -12,6 +12,7 @@
 #import "AANullNode.h"
 #import "AABool.h"
 #import "Persistent-Prefix.pch"
+#import "AAMapArrayNodeIterator.h"
 
 @interface AAArrayNode ()
 @property AAOwner *owner;
@@ -158,6 +159,10 @@
 
 -(BOOL)isEmpty {
     return [self.array count] == 0;
+}
+
+-(id<AAIIterator>)iterator {
+    return [AAMapArrayNodeIterator create:self.array];
 }
 
 @end

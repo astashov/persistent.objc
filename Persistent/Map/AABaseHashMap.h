@@ -37,6 +37,8 @@
 
 -(BOOL)isEqualToHashMap:(AABaseHashMap *)hashMap;
 
+-(id<AAIIterator>)iterator;
+
 @property NSUInteger count;
 @property id<AAINode> root;
 @property AAOwner *owner;

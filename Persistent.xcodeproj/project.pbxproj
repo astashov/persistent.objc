@@ -22,6 +22,12 @@
 		3A588BA219E055BB00746226 /* AABool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8619DFADAA00746226 /* AABool.m */; };
 		3A588BA319E055BB00746226 /* AATransientVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8919DFCB8500746226 /* AATransientVector.m */; };
 		3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */; };
+		3AB37F8A1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */; };
+		3AB37F8B1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */; };
+		3AB37F921A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F911A0A0A25007D4F09 /* AAMapArrayNodeIterator.m */; };
+		3AB37F931A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F911A0A0A25007D4F09 /* AAMapArrayNodeIterator.m */; };
+		3AB37F961A0AB43A007D4F09 /* AASetIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F951A0AB43A007D4F09 /* AASetIterator.m */; };
+		3AB37F971A0AB43A007D4F09 /* AASetIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F951A0AB43A007D4F09 /* AASetIterator.m */; };
 		3AF8835C19FB7B7C00687633 /* AABitmapIndexedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8835B19FB7B7C00687633 /* AABitmapIndexedNode.m */; };
 		3AF8835F19FCB25A00687633 /* AAPersistentHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8835E19FCB25A00687633 /* AAPersistentHashMap.m */; };
 		3AF8836219FF60BA00687633 /* AAArrayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8836119FF60BA00687633 /* AAArrayNode.m */; };
@@ -78,6 +84,13 @@
 		3A588B9719DFD56500746226 /* PersistentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentTests.m; sourceTree = "<group>"; };
 		3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVectorClass.m; sourceTree = "<group>"; };
 		3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Persistent-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		3AB37F881A09DC2E007D4F09 /* AAMapNodeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMapNodeIterator.h; sourceTree = "<group>"; };
+		3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMapNodeIterator.m; sourceTree = "<group>"; };
+		3AB37F8C1A09F3C3007D4F09 /* AAIIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAIIterator.h; sourceTree = "<group>"; };
+		3AB37F901A0A0A25007D4F09 /* AAMapArrayNodeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMapArrayNodeIterator.h; sourceTree = "<group>"; };
+		3AB37F911A0A0A25007D4F09 /* AAMapArrayNodeIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMapArrayNodeIterator.m; sourceTree = "<group>"; };
+		3AB37F941A0AB43A007D4F09 /* AASetIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASetIterator.h; sourceTree = "<group>"; };
+		3AB37F951A0AB43A007D4F09 /* AASetIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASetIterator.m; sourceTree = "<group>"; };
 		3AF8835619FA008B00687633 /* AABaseVectorPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseVectorPrivate.h; sourceTree = "<group>"; };
 		3AF8835719FB68BC00687633 /* AAINode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAINode.h; sourceTree = "<group>"; };
 		3AF8835A19FB7B7C00687633 /* AABitmapIndexedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABitmapIndexedNode.h; sourceTree = "<group>"; };
@@ -152,6 +165,7 @@
 				3A29EC5C19DC72F0006643CB /* AAOwner.h */,
 				3A29EC5D19DC72F0006643CB /* AAOwner.m */,
 				3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */,
+				3AB37F8C1A09F3C3007D4F09 /* AAIIterator.h */,
 			);
 			path = Persistent;
 			sourceTree = "<group>";
@@ -210,6 +224,10 @@
 				3AF883711A06F08E00687633 /* AATransientHashMap.m */,
 				3AF8838B1A08BC5600687633 /* AANullNode.h */,
 				3AF8838C1A08BC5600687633 /* AANullNode.m */,
+				3AB37F881A09DC2E007D4F09 /* AAMapNodeIterator.h */,
+				3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */,
+				3AB37F901A0A0A25007D4F09 /* AAMapArrayNodeIterator.h */,
+				3AB37F911A0A0A25007D4F09 /* AAMapArrayNodeIterator.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -223,6 +241,8 @@
 				3AF8837E1A08840000687633 /* AABaseSet.m */,
 				3AF883811A08928200687633 /* AATransientSet.h */,
 				3AF883821A08928200687633 /* AATransientSet.m */,
+				3AB37F941A0AB43A007D4F09 /* AASetIterator.h */,
+				3AB37F951A0AB43A007D4F09 /* AASetIterator.m */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -316,12 +336,15 @@
 			files = (
 				3A29EC4A19DC5E0E006643CB /* main.m in Sources */,
 				3AF883831A08928200687633 /* AATransientSet.m in Sources */,
+				3AB37F8A1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */,
 				3AF8835F19FCB25A00687633 /* AAPersistentHashMap.m in Sources */,
+				3AB37F921A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */,
 				3AF8837F1A08840000687633 /* AABaseSet.m in Sources */,
 				3AF883721A06F08E00687633 /* AATransientHashMap.m in Sources */,
 				3AF8835C19FB7B7C00687633 /* AABitmapIndexedNode.m in Sources */,
 				3A588B8719DFADAA00746226 /* AABool.m in Sources */,
 				3A29EC5E19DC72F0006643CB /* AAOwner.m in Sources */,
+				3AB37F961A0AB43A007D4F09 /* AASetIterator.m in Sources */,
 				3AF8838D1A08BC5600687633 /* AANullNode.m in Sources */,
 				3A588B8A19DFCB8500746226 /* AATransientVector.m in Sources */,
 				3AF8836E1A069D5B00687633 /* AABaseHashMap.m in Sources */,
@@ -340,6 +363,7 @@
 			files = (
 				3A588B9F19E055B100746226 /* AABaseVector.m in Sources */,
 				3AF883731A06F08E00687633 /* AATransientHashMap.m in Sources */,
+				3AB37F8B1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */,
 				3AF883681A00B5D300687633 /* AABitmapIndexedNode.m in Sources */,
 				3AF8838A1A0899B400687633 /* AAPersistentSetClass.m in Sources */,
 				3A588B9D19DFD58A00746226 /* AAPersistentVectorClass.m in Sources */,
@@ -355,6 +379,8 @@
 				3AF8838E1A08BC5600687633 /* AANullNode.m in Sources */,
 				3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */,
 				3AF883801A08840000687633 /* AABaseSet.m in Sources */,
+				3AB37F931A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */,
+				3AB37F971A0AB43A007D4F09 /* AASetIterator.m in Sources */,
 				3A588BA319E055BB00746226 /* AATransientVector.m in Sources */,
 				3AF883671A00B4FA00687633 /* AAPersistentHashMapClass.m in Sources */,
 				3A588BA219E055BB00746226 /* AABool.m in Sources */,

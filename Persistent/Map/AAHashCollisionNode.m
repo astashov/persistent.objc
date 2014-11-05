@@ -12,6 +12,7 @@
 #import "AABool.h"
 #import "AAOwner.h"
 #import "Persistent-Prefix.pch"
+#import "AAMapNodeIterator.h"
 
 static const NSUInteger notFound = -1;
 
@@ -110,6 +111,10 @@ static const NSUInteger notFound = -1;
 
 -(BOOL)isEmpty {
     return [self.array count] == 0;
+}
+
+-(id<AAIIterator>)iterator {
+    return [AAMapNodeIterator create:self.array];
 }
 
 @end

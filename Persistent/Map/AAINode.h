@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AAIIterator.h"
 @class AABool;
 @class AAOwner;
 
@@ -25,5 +26,7 @@
 -(void)each:(void(^)(id key, id value))block;
 
 -(BOOL)isEmpty;
+
+-(id<AAIIterator>)iterator;
 
 @end

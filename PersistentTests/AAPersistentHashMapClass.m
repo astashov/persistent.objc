@@ -132,6 +132,21 @@ static NSString *bar(NSUInteger i) {
     XCTAssertNotEqualObjects(a, c);
 }
 
+-(void)testIterator {
+    AAPersistentHashMap *a = [AAPersistentHashMap empty];
+    for (int i = 0; i < 100; i += 1) { a = [a setObject:bar(i) forKey:foo(i)]; }
+
+    NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+    id b = [a iterator];
+    while (b) {
+        d[[b first][0]] = [b first][1];
+        b = [b next];
+    }
+    for (int i = 0; i < 100; i += 1) {
+        XCTAssertEqualObjects(d[foo(i)], bar(i));
+    }
+}
+
 
 //-(void)testBenchmarks {
 //

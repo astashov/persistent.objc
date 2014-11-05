@@ -12,6 +12,7 @@
 #import "AABool.h"
 #import "AANullNode.h"
 #import "Persistent-Prefix.pch"
+#import "AAMapNodeIterator.h"
 
 @interface AABitmapIndexedNode ()
 @property AAOwner *owner;
@@ -211,6 +212,10 @@
         [newArray addObjectsFromArray:self.array];
         return [[AABitmapIndexedNode alloc] initWithBitmap:self.bitmap array:newArray owner:owner];
     }
+}
+
+-(id<AAIIterator>)iterator {
+    return [AAMapNodeIterator create:self.array];
 }
 
 @end

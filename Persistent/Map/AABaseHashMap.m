@@ -130,6 +130,9 @@
     return result;
 }
 
+-(id<AAIIterator>)iterator {
+    return [self.root iterator];
+}
 
 # pragma mark Private Methods
 
