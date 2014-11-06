@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "AABaseHashMap.h"
 
+@class AATransientHashMap;
+
 @interface AAPersistentHashMap : AABaseHashMap
+
++(instancetype)empty;
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+-(AATransientHashMap *)asTransient;
+-(AAPersistentHashMap *)withTransient:(AATransientHashMap *(^)(AATransientHashMap *))block;
 
 @end

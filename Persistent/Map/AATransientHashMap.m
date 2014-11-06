@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AATransientHashMap.h"
+#import "AATransientHashMapPrivate.h"
 
 @implementation AATransientHashMap
 
@@ -16,6 +16,10 @@
         self.owner = owner;
     }
     return self;
+}
+
+-(AAPersistentHashMap *)asPersistent {
+    return (AAPersistentHashMap *)[self ensureOwner:nil];
 }
 
 @end

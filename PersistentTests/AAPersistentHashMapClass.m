@@ -147,6 +147,31 @@ static NSString *bar(NSUInteger i) {
     }
 }
 
+-(void)testFastEnumeration {
+    AAPersistentHashMap *a = [AAPersistentHashMap empty];
+    for (int i = 0; i < 100; i += 1) { a = [a setObject:bar(i) forKey:foo(i)]; }
+
+    NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+    for (id b in a) {
+        d[b] = [a objectForKey:b];
+    }
+    for (int i = 0; i < 100; i += 1) {
+        XCTAssertEqualObjects(d[foo(i)], bar(i));
+    }
+}
+
+-(void)testInitWithDictionary {
+    AAPersistentHashMap *a = [[AAPersistentHashMap alloc] initWithDictionary:@{@"a": @"b", @"c": @"d"}];
+    XCTAssertEqualObjects([a objectForKey:@"a"], @"b");
+    XCTAssertEqualObjects([a objectForKey:@"c"], @"d");
+}
+
+-(void)testToDictionary {
+    AAPersistentHashMap *a = [[AAPersistentHashMap alloc] initWithDictionary:@{@"a": @"b", @"c": @"d"}];
+    NSDictionary *result = @{@"a": @"b", @"c": @"d"};
+    XCTAssertEqualObjects([a toDictionary], result);
+}
+
 
 //-(void)testBenchmarks {
 //

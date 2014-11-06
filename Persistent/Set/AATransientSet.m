@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AATransientSet.h"
-#import "AAPersistentSet.h"
+#import "AATransientSetPrivate.h"
+#import "AAPersistentSetPrivate.h"
 #import "AATransientHashMap.h"
 
 @implementation AATransientSet
@@ -17,17 +17,8 @@
     return self;
 }
 
-+(instancetype)empty {
-    static AATransientSet *emptyPersistentSet = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        emptyPersistentSet = [[self alloc] initWithHashMap:[AATransientHashMap empty]];
-    });
-    return emptyPersistentSet;
-}
-
 -(AAPersistentSet *)asPersistent {
-    return [[AAPersistentSet alloc] initWithHashMap:[self.hashMap asPersistent]];
+    return [[AAPersistentSet alloc] initWithHashMap:[(AATransientHashMap *)self.hashMap asPersistent]];
 }
 
 -(BOOL)isEqualToSet:(AATransientSet *)set {

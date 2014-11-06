@@ -9,16 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AAIIterator.h"
 
-@class AABaseHashMap;
-
 // Abstract class
-@interface AABaseSet : NSObject <NSFastEnumeration> {
-    AABaseHashMap *_hashMap;
-    // It never changes, just for sake of NSFastEnumeration
-    NSUInteger _mutateFlag;
-}
-
--(instancetype)initWithHashMap:(AABaseHashMap *)hashMap;
+@interface AABaseSet : NSObject <NSFastEnumeration>
 
 -(BOOL)containsObject:(id)anObject;
 -(instancetype)addObject:(id)anObject;
@@ -30,6 +22,8 @@
 
 -(id<AAIIterator>)iterator;
 
-@property AABaseHashMap *hashMap;
+-(NSSet *)toSet;
+
 @property(readonly) NSUInteger count;
+
 @end

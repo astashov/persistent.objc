@@ -23,7 +23,7 @@
     for (int i = 0; i < 70; i += 1) { v = [v addObject:@(i)]; }
     for (int i = 0; i < 65; i += 1) { v = [v removeLastObject]; }
     NSArray *expected = @[@(0), @(1), @(2), @(3), @(4), @(0), @(1), @(2), @(3), @(4)];
-    XCTAssertEqualObjects([v asArray], expected);
+    XCTAssertEqualObjects([v toArray], expected);
 }
 
 -(void)testGet {

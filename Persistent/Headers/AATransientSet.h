@@ -9,15 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AABaseSet.h"
 
-@class AATransientHashMap;
 @class AAPersistentSet;
 
 @interface AATransientSet : AABaseSet
 
-+(instancetype)empty;
--(instancetype)initWithHashMap:(AATransientHashMap *)hashMap;
 -(AAPersistentSet *)asPersistent;
-
--(BOOL)isEqualToSet:(AAPersistentSet *)set;
 
 @end

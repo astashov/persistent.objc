@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AABaseHashMap.h"
+#import "AATransientHashMapPrivate.h"
 #import "AAINode.h"
 #import "AABool.h"
 #import "AABitmapIndexedNode.h"
@@ -16,23 +16,18 @@
 
 @implementation AABaseHashMap
 
+-(instancetype)init {
+    return [self initWithCount:0 root:[AABitmapIndexedNode empty]];
+}
+
 -(instancetype)initWithCount:(NSUInteger)count root:(id<AAINode>)root {
-    self = [self init];
+    self = [super init];
     if (self) {
         self.count = count;
         self.root = root;
         self.altered = NO;
     }
     return self;
-}
-
-+(instancetype)empty {
-    static AAPersistentHashMap *emptyPersistentHashMap = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        emptyPersistentHashMap = [[self alloc] initWithCount:0 root:[AABitmapIndexedNode empty]];
-    });
-    return emptyPersistentHashMap;
 }
 
 #pragma mark API
@@ -73,20 +68,6 @@
     } else {
         return [[AAPersistentHashMap alloc] initWithCount:didRemoveLeaf.value ? self.count - 1 : self.count root:newRoot];
     }
-}
-
--(AATransientHashMap *)asTransient {
-    return (AATransientHashMap *)(self.owner ? self : [self ensureOwner:[[AAOwner alloc] init]]);
-}
-
--(AAPersistentHashMap *)asPersistent {
-    return (AAPersistentHashMap *)[self ensureOwner:nil];
-}
-
--(AABaseHashMap *)withTransient:(AATransientHashMap *(^)(AATransientHashMap *))block {
-    AATransientHashMap *transient = [self asTransient];
-    transient = (AATransientHashMap *)block(transient);
-    return transient.altered ? [transient ensureOwner:self.owner] : self;
 }
 
 -(NSString *)internals {
@@ -134,6 +115,14 @@
     return [self.root iterator];
 }
 
+-(NSDictionary *)toDictionary {
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [self each:^(id key, id value) {
+        dictionary[key] = value;
+    }];
+    return [[NSDictionary alloc] initWithDictionary:dictionary];
+}
+
 # pragma mark Private Methods
 
 -(AABaseHashMap *)ensureOwner:(AAOwner *)owner {
@@ -145,6 +134,28 @@
     } else {
         return [[AATransientHashMap alloc] initWithCount:self.count root:self.root owner:owner];
     }
+}
+
+-(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                 objects:(id __unsafe_unretained [])buffer
+                                   count:(NSUInteger)len {
+    if (state->state == 0) {
+        state->state = 1;
+        state->mutationsPtr = (unsigned long *)&_count;
+        state->extra[0] = (unsigned long)(__bridge_retained void *)[self iterator];
+    }
+    id<AAIIterator> iterator = (__bridge_transfer id<AAIIterator>)(void *)state->extra[0];
+    NSUInteger i;
+    for (i = 0; i < len && iterator != nil; i += 1) {
+        id __unsafe_unretained value = [iterator first][0];
+        buffer[i] = value;
+        iterator = [iterator next];
+    }
+    if (i > 0) {
+        state->extra[0] = (unsigned long)(__bridge_retained void *)iterator;
+    }
+    state->itemsPtr = buffer;
+    return i;
 }
 
 @end

@@ -50,4 +50,9 @@
     return NO;
 }
 
+-(id<AAIIterator>)iterator {
+    [NSException raise:@"This should not happen" format:@"This method should never be called on AANullNode"];
+    return nil;
+}
+
 @end

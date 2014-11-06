@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AABaseVectorPrivate.h"
+#import "AABaseVector.h"
 
 @interface AATransientVector : AABaseVector
 
--(instancetype)initWithSize:(NSUInteger)size level:(NSUInteger)level root:(AAVNode *)root tail:(AAVNode *)tail owner:(AAOwner *)owner;
+-(AABaseVector *)asPersistent;
 
 @end

@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AABaseHashMap.h"
 
+@class AAPersistentHashMap;
+
 @interface AATransientHashMap : AABaseHashMap
 
--(instancetype)initWithCount:(NSUInteger)count root:(id<AAINode>)root owner:(AAOwner *)owner;
+-(AAPersistentHashMap *)asPersistent;
 
 @end

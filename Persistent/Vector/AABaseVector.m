@@ -8,7 +8,9 @@
 
 #import "AABaseVectorPrivate.h"
 #import "AATransientVector.h"
+#import "AATransientVectorPrivate.h"
 #import "AAPersistentVector.h"
+#import "AAPersistentVectorPrivate.h"
 #import "AAVNode.h"
 #import "AANullNode.h"
 #import "Persistent-Prefix.pch"
@@ -72,7 +74,7 @@
 -(instancetype)addObject:(id)value {
     NSUInteger length = self.count;
     return [self withTransient:^(AATransientVector *transient) {
-        return [[transient increaseSize] replaceObjectAtIndex:length withObject:value];
+        return (AATransientVector *)[[transient increaseSize] replaceObjectAtIndex:length withObject:value];
     }];
 }
 
@@ -84,21 +86,17 @@
     }
 }
 
--(AABaseVector *)asTransient {
-    return self.owner ? self : [self ensureOwner:[[AAOwner alloc] init]];
+-(AATransientVector *)asTransient {
+    return (AATransientVector *)(self.owner ? self : [self ensureOwner:[[AAOwner alloc] init]]);
 }
 
--(AABaseVector *)asPersistent {
-    return [self ensureOwner:nil];
-}
-
--(AABaseVector *)withTransient:(AABaseVector *(^)(AATransientVector *))block {
+-(AABaseVector *)withTransient:(AATransientVector *(^)(AATransientVector *))block {
     AATransientVector *transient = (AATransientVector *)[self asTransient];
     transient = (AATransientVector *)block(transient);
-    return transient.altered ? [transient ensureOwner:self.owner] : self;
+    return (AAPersistentVector *)(transient.altered ? [transient ensureOwner:self.owner] : self);
 }
 
--(NSArray *)asArray {
+-(NSArray *)toArray {
     NSMutableArray *a = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < self.count; i += 1) {
         [a addObject:[self objectAtIndex:i]];
@@ -107,7 +105,7 @@
 }
 
 -(NSString *)description {
-    return [[self asArray] description];
+    return [[self toArray] description];
 }
 
 -(NSString *)internals {
@@ -119,8 +117,6 @@
     return [a description];
 }
 
-# pragma mark Private Methods
-
 -(AABaseVector *)ensureOwner:(AAOwner *)owner {
     if (owner == self.owner) {
         return self;
@@ -131,6 +127,8 @@
         return [[AATransientVector alloc] initWithSize:self.count level:self.level root:self.root tail:self.tail owner:owner];
     }
 }
+
+# pragma mark Private Methods
 
 -(AABaseVector *)increaseSize {
     return [self resize:YES];

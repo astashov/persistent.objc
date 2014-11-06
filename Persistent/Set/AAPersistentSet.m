@@ -6,11 +6,21 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AAPersistentSet.h"
-#import "AATransientSet.h"
+#import "AAPersistentSetPrivate.h"
+#import "AATransientSetPrivate.h"
 #import "AAPersistentHashMap.h"
 
 @implementation AAPersistentSet
+
+-(instancetype)initWithSet:(NSSet *)set {
+    self = [AAPersistentSet empty];
+    return [self withTransient:^(AATransientSet *transient) {
+        for (id value in set) {
+            transient = [transient addObject:value];
+        }
+        return transient;
+    }];
+}
 
 -(instancetype)initWithHashMap:(AAPersistentHashMap *)hashMap {
     self = [super initWithHashMap:hashMap];
@@ -27,17 +37,13 @@
 }
 
 -(AATransientSet *)asTransient {
-    return [[AATransientSet alloc] initWithHashMap:[self.hashMap asTransient]];
+    return [[AATransientSet alloc] initWithHashMap:[(AAPersistentHashMap *)self.hashMap asTransient]];
 }
 
 -(AAPersistentSet *)withTransient:(AATransientSet *(^)(AATransientSet *))block {
     AATransientSet *transient = [self asTransient];
     block(transient);
     return [transient asPersistent];
-}
-
--(BOOL)isEqualToSet:(AAPersistentSet *)set {
-    return [super isEqualToSet:set];
 }
 
 @end

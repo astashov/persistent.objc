@@ -9,7 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "AABaseVector.h"
 
-@interface AABaseVector ()
+@class AAOwner;
+@class AAVNode;
+@class AATransientVector;
+
+@interface AABaseVector () {
+    NSUInteger _count;
+    AAOwner *_owner;
+    AAVNode *_root;
+    AAVNode *_tail;
+    NSUInteger _level;
+    BOOL _altered;
+    NSUInteger _hash;
+}
+
+-(AABaseVector *)ensureOwner:(AAOwner *)owner;
+-(AATransientVector *)asTransient;
+-(AABaseVector *)withTransient:(AATransientVector *(^)(AATransientVector *))block;
 
 @property AAOwner *owner;
 @property AAVNode *root;

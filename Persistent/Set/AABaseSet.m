@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AABaseSet.h"
+#import "AABaseSetPrivate.h"
 #import "AABaseHashMap.h"
 #import "AASetIterator.h"
 

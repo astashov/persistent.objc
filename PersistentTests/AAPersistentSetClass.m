@@ -122,4 +122,17 @@
     }
 }
 
+-(void)testInitWithSet {
+    AAPersistentSet *a = [[AAPersistentSet alloc] initWithSet:[NSSet setWithArray:@[@"a", @"b", @"c"]]];
+    XCTAssert([a containsObject:@"a"]);
+    XCTAssert([a containsObject:@"b"]);
+    XCTAssert([a containsObject:@"c"]);
+}
+
+-(void)testToSet {
+    AAPersistentSet *a = [[AAPersistentSet alloc] initWithSet:[NSSet setWithArray:@[@"a", @"b", @"c"]]];
+    NSSet *result = [NSSet setWithArray:@[@"a", @"b", @"c"]];
+    XCTAssertEqualObjects([a toSet], result);
+}
+
 @end

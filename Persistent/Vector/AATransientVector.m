@@ -7,6 +7,8 @@
 //
 
 #import "AATransientVector.h"
+#import "AATransientVectorPrivate.h"
+#import "AAPersistentVector.h"
 
 @implementation AATransientVector
 
@@ -20,6 +22,10 @@
         self.owner = owner;
     }
     return self;
+}
+
+-(AAPersistentVector *)asPersistent {
+    return (AAPersistentVector *)[self ensureOwner:nil];
 }
 
 @end

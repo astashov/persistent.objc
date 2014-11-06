@@ -7,19 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class AAOwner;
-@class AAVNode;
-@class AATransientVector;
 
-@interface AABaseVector : NSObject <NSFastEnumeration> {
-    NSUInteger _count;
-    AAOwner *_owner;
-    AAVNode *_root;
-    AAVNode *_tail;
-    NSUInteger _level;
-    BOOL _altered;
-    NSUInteger _hash;
-}
+// Abstract class
+@interface AABaseVector : NSObject <NSFastEnumeration>
 
 -(id)objectAtIndex:(NSUInteger)index;
 -(instancetype)replaceObjectAtIndex:(NSUInteger)index withObject:(id)value;
@@ -27,11 +17,7 @@
 -(instancetype)addObject:(id)value;
 -(instancetype)removeLastObject;
 
--(AABaseVector *)asTransient;
--(AABaseVector *)asPersistent;
--(AABaseVector *)withTransient:(AABaseVector *(^)(AATransientVector *))block;
-
--(NSArray *)asArray;
+-(NSArray *)toArray;
 
 // For debugging only :)
 -(NSString *)internals;
