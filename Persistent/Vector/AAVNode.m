@@ -9,6 +9,7 @@
 #import "AAVNode.h"
 #import "Persistent-Prefix.pch"
 #import "AABool.h"
+#import "AAVectorIterator.h"
 
 @implementation AAVNode
 
@@ -94,4 +95,9 @@
         }
     }
 }
+
+-(id<AAIIterator>)iterator {
+    return [AAVectorIterator create:self.array];
+}
+
 @end

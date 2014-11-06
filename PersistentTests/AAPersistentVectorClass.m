@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "AAPersistentVector.h"
 #import "AATransientVector.h"
+#import "AAIIterator.h"
 
 @interface AAPersistentVectorClass : XCTestCase
 @end
@@ -102,6 +103,21 @@
 
     XCTAssertEqual(f.count, 50);
     XCTAssertEqual([f objectAtIndex:10], @(2000));
+}
+
+-(void)testIterator {
+    AAPersistentVector *a = [AAPersistentVector empty];
+    for (int i = 0; i < 100; i += 1) { a = [a addObject:@(i)]; }
+
+    NSMutableArray *d = [[NSMutableArray alloc] init];
+    id<AAIIterator> b = [a iterator];
+    while (b) {
+        [d addObject:[b first]];
+        b = [b next];
+    }
+    for (int i = 0; i < 100; i += 1) {
+        XCTAssert([d containsObject:@(i)]);
+    }
 }
 
 -(void)testFastEnumeration {

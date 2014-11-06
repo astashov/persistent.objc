@@ -12,10 +12,10 @@
 #import "AAPersistentVector.h"
 #import "AAPersistentVectorPrivate.h"
 #import "AAVNode.h"
-#import "AANullNode.h"
 #import "Persistent-Prefix.pch"
 #import "AABool.h"
 #import "AAOwner.h"
+#import "AAVectorIterator.h"
 
 @implementation AABaseVector
 
@@ -110,7 +110,7 @@
 
 -(NSString *)internals {
     NSMutableDictionary *a = [[NSMutableDictionary alloc] init];
-    a[@"owner"] = self.owner ?: [AANullNode node];
+    a[@"owner"] = self.owner ?: [NSNull null];
     a[@"root"] = self.root;
     a[@"tail"] = self.tail;
     a[@"level"] = @(self.level);
@@ -238,16 +238,19 @@
                                  objects:(id __unsafe_unretained [])buffer
                                    count:(NSUInteger)len {
     if (state->state == 0) {
-        state->mutationsPtr = (unsigned long *)&_count;
         state->state = 1;
-        state->extra[0] = 0;
+        state->mutationsPtr = (unsigned long *)&_count;
+        state->extra[0] = (unsigned long)(__bridge_retained void *)[self iterator];
     }
-    id __unsafe_unretained value = [self objectAtIndex:state->extra[0]];
+    id<AAIIterator> iterator = (__bridge_transfer id<AAIIterator>)(void *)state->extra[0];
     NSUInteger i;
-    for (i = 0; i < len && value != nil; i += 1) {
+    for (i = 0; i < len && iterator != nil; i += 1) {
+        id __unsafe_unretained value = [iterator first];
         buffer[i] = value;
-        state->extra[0] += 1;
-        value = [self objectAtIndex:state->extra[0]];
+        iterator = [iterator next];
+    }
+    if (i > 0) {
+        state->extra[0] = (unsigned long)(__bridge_retained void *)iterator;
     }
     state->itemsPtr = buffer;
     return i;
@@ -284,6 +287,10 @@
         }
     }
     return true;
+}
+
+-(id<AAIIterator>)iterator {
+    return [AAVectorIterator create:@[self.root, self.tail]];
 }
 
 @end

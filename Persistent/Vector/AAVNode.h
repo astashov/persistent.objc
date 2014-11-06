@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AAIIterator.h"
 @class AAOwner;
 @class AABool;
 
@@ -22,7 +23,7 @@
 -(id)get:(NSUInteger)index;
 -(instancetype)removeAfter:(NSUInteger)newSize withOwner:(AAOwner *)owner;
 -(instancetype)update:(NSUInteger)index withValue:(id)value level:(NSUInteger)level owner:(AAOwner *)owner didAlter:(AABool *)didAlter;
-//-(void)compact;
+-(id<AAIIterator>)iterator;
 
 @property NSMutableArray *array;
 @property AAOwner *owner;

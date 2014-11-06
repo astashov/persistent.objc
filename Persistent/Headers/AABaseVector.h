@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AAIIterator.h"
 
 // Abstract class
 @interface AABaseVector : NSObject <NSFastEnumeration>
@@ -23,6 +24,8 @@
 -(NSString *)internals;
 
 -(BOOL)isEqualToVector:(AABaseVector *)vector;
+
+-(id<AAIIterator>)iterator;
 
 @property(readonly, nonatomic) NSUInteger count;
 @property(readonly, nonatomic) NSUInteger hash;
