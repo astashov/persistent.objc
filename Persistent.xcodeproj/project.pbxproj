@@ -24,6 +24,7 @@
 		3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */; };
 		3A846FF21A0B5C1000D2784E /* AAVectorIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF11A0B5C1000D2784E /* AAVectorIterator.m */; };
 		3A846FF31A0B5C1300D2784E /* AAVectorIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF11A0B5C1000D2784E /* AAVectorIterator.m */; };
+		3A846FF61A0BF3D700D2784E /* AASameHashObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF51A0BF3D700D2784E /* AASameHashObject.m */; };
 		3AB37F8A1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */; };
 		3AB37F8B1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */; };
 		3AB37F921A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F911A0A0A25007D4F09 /* AAMapArrayNodeIterator.m */; };
@@ -93,6 +94,9 @@
 		3A846FED1A0B50A400D2784E /* AABaseSetPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseSetPrivate.h; sourceTree = "<group>"; };
 		3A846FF01A0B5C1000D2784E /* AAVectorIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAVectorIterator.h; sourceTree = "<group>"; };
 		3A846FF11A0B5C1000D2784E /* AAVectorIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAVectorIterator.m; sourceTree = "<group>"; };
+		3A846FF41A0BF3D700D2784E /* AASameHashObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASameHashObject.h; sourceTree = "<group>"; };
+		3A846FF51A0BF3D700D2784E /* AASameHashObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASameHashObject.m; sourceTree = "<group>"; };
+		3A846FF71A0C009500D2784E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3AB37F881A09DC2E007D4F09 /* AAMapNodeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMapNodeIterator.h; sourceTree = "<group>"; };
 		3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMapNodeIterator.m; sourceTree = "<group>"; };
 		3AB37F8C1A09F3C3007D4F09 /* AAIIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAIIterator.h; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				3A29EC4819DC5E0E006643CB /* Persistent */,
 				3A588B9419DFD56500746226 /* PersistentTests */,
 				3A29EC4719DC5E0E006643CB /* Products */,
+				3A846FF71A0C009500D2784E /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,6 +201,8 @@
 		3A588B9519DFD56500746226 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A846FF41A0BF3D700D2784E /* AASameHashObject.h */,
+				3A846FF51A0BF3D700D2784E /* AASameHashObject.m */,
 				3A588B9619DFD56500746226 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -409,6 +416,7 @@
 				3AF8838E1A08BC5600687633 /* AANullNode.m in Sources */,
 				3A588BA419E055BB00746226 /* AAPersistentVector.m in Sources */,
 				3AF883801A08840000687633 /* AABaseSet.m in Sources */,
+				3A846FF61A0BF3D700D2784E /* AASameHashObject.m in Sources */,
 				3AB37F931A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */,
 				3AB37F971A0AB43A007D4F09 /* AASetIterator.m in Sources */,
 				3A588BA319E055BB00746226 /* AATransientVector.m in Sources */,

@@ -33,5 +33,4 @@ These data structures are not really production ready, they are not thoroughly t
 
 ## TODO
 
-* Add tests for AAHashCollisionNode (i.e. add hash-collisioned keys into hash map)
 * Wrap it into CocoaPod

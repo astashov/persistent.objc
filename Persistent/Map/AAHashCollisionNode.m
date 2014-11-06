@@ -72,9 +72,9 @@ static const NSUInteger notFound = -1;
                 return node;
             }
         } else {
-            [self.array addObject:key];
-            [self.array addObject:value];
-            self.count += 1;
+            [node.array addObject:key];
+            [node.array addObject:value];
+            node.count += 1;
             didAddLeaf.value = YES;
             return node;
         }

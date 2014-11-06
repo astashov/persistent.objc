@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "AAPersistentHashMap.h"
 #import "AATransientHashMap.h"
+#import "AASameHashObject.h"
 
 @interface AAPersistentHashMapClass : XCTestCase
 
@@ -21,6 +22,10 @@ static NSString *foo(NSUInteger i) {
 
 static NSString *bar(NSUInteger i) {
     return [NSString stringWithFormat:@"bar%lu", (unsigned long)i];
+}
+
+static AASameHashObject *sameHashFoo(NSUInteger i) {
+    return [[AASameHashObject alloc] initWithString:foo(i)];
 }
 
 @implementation AAPersistentHashMapClass
@@ -172,6 +177,19 @@ static NSString *bar(NSUInteger i) {
     XCTAssertEqualObjects([a toDictionary], result);
 }
 
+-(void)testAddObjectsWithSameHash {
+    AAPersistentHashMap *a = [AAPersistentHashMap empty];
+    for (int i = 0; i < 100; i += 1) { a = [a setObject:bar(i) forKey:foo(i)]; }
+    for (int i = 60; i < 70; i += 1) {
+        a = [a setObject:bar(i + 100) forKey:sameHashFoo(i)];
+    }
+    for (int i = 0; i < 100; i += 1) {
+        XCTAssertEqualObjects([a objectForKey:foo(i)], bar(i));
+    }
+    for (int i = 60; i < 70; i += 1) {
+        XCTAssertEqualObjects([a objectForKey:sameHashFoo(i)], bar(i + 100));
+    }
+}
 
 //-(void)testBenchmarks {
 //
