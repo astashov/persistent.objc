@@ -7,7 +7,8 @@
 //
 
 #import "AAPersistentHashMap.h"
-#import "AATransientHashMap.h"
+#import "AABaseHashMapPrivate.h"
+#import "AATransientHashMapPrivate.h"
 #import "AAOwner.h"
 
 @implementation AAPersistentHashMap

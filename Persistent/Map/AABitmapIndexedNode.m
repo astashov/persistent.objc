@@ -11,7 +11,7 @@
 #import "AAINode.h"
 #import "AABool.h"
 #import "AANullNode.h"
-#import "Persistent-Prefix.pch"
+#import "AAPersistentSharedHeaders.h"
 #import "AAMapNodeIterator.h"
 
 @interface AABitmapIndexedNode ()
