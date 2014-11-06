@@ -11,8 +11,8 @@
 #import "AAHashCollisionNode.h"
 #import "AABool.h"
 
-#ifndef Persistent_PrefixHeader_pch
-#define Persistent_PrefixHeader_pch
+#ifndef Persistent_Shared_Headers
+#define Persistent_Shared_Headers
 
 static const NSUInteger SHIFT = 5;
 static const NSUInteger SIZE = 1 << SHIFT;
@@ -37,7 +37,6 @@ static NSUInteger bitpos(NSUInteger hash, NSUInteger shift) {
     return 1 << mask(hash, shift);
 }
 
-
 static id<AAINode> createNode(NSUInteger shift, id key1, id val1, id key2, id val2, AAOwner *owner) {
     NSUInteger key1hash = [key1 hash];
     NSUInteger key2hash = [key2 hash];
@@ -54,29 +53,23 @@ static id<AAINode> createNode(NSUInteger shift, id key1, id val1, id key2, id va
 }
 
 static NSString *ib(int intValue) {
-    int byteBlock = SHIFT,    // 8 bits per byte
-        totalBits = SIZE, // Total bits
-        binaryDigit = 1,  // Current masked bit
-        byteBlockShift = SIZE % SHIFT;
+    int byteBlock = SHIFT;
+    int totalBits = SIZE;
+    int binaryDigit = 1;
+    int byteBlockShift = SIZE % SHIFT;
 
-    // Binary string
     NSMutableString *binaryStr = [[NSMutableString alloc] init];
 
-    do
-    {
-        // Check next bit, shift contents left, append 0 or 1
+    do {
         [binaryStr insertString:((intValue & binaryDigit) ? @"1" : @"0" ) atIndex:0];
 
-        // More bits? On byte boundary ?
-        if (--totalBits && !((totalBits - byteBlockShift) % byteBlock))
+        if (--totalBits && !((totalBits - byteBlockShift) % byteBlock)) {
             [binaryStr insertString:@"|" atIndex:0];
+        }
 
-        // Move to next bit
         binaryDigit <<= 1;
-
     } while (totalBits);
 
-    // Return binary string
     return binaryStr;
 }
 

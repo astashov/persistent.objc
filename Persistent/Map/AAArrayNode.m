@@ -11,7 +11,7 @@
 #import "AAINode.h"
 #import "AANullNode.h"
 #import "AABool.h"
-#import "Persistent-Prefix.pch"
+#import "AAPersistentSharedHeaders.h"
 #import "AAMapArrayNodeIterator.h"
 
 @interface AAArrayNode ()

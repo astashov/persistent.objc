@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AABaseVector.h"
+#import "AAPersistentVector.h"
 
 @interface AATransientVector : AABaseVector
 
--(AABaseVector *)asPersistent;
+-(AAPersistentVector *)asPersistent;
 
 @end

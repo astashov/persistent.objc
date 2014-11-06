@@ -20,6 +20,8 @@
 
 -(NSArray *)toArray;
 
+-(void)each:(void(^)(id))block;
+
 // For debugging only :)
 -(NSString *)internals;
 

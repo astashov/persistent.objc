@@ -12,7 +12,7 @@
 #import "AAPersistentVector.h"
 #import "AAPersistentVectorPrivate.h"
 #import "AAVNode.h"
-#import "Persistent-Prefix.pch"
+#import "AAPersistentSharedHeaders.h"
 #import "AABool.h"
 #import "AAOwner.h"
 #import "AAVectorIterator.h"
@@ -76,6 +76,12 @@
     return [self withTransient:^(AATransientVector *transient) {
         return (AATransientVector *)[[transient increaseSize] replaceObjectAtIndex:length withObject:value];
     }];
+}
+
+-(void)each:(void(^)(id))block {
+    for (id value in self) {
+        block(value);
+    }
 }
 
 -(instancetype)removeLastObject {

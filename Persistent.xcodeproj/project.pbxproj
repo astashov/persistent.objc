@@ -86,7 +86,7 @@
 		3A588B9619DFD56500746226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A588B9719DFD56500746226 /* PersistentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentTests.m; sourceTree = "<group>"; };
 		3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVectorClass.m; sourceTree = "<group>"; };
-		3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Persistent-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		3A588B9E19DFD8ED00746226 /* AAPersistentSharedHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPersistentSharedHeaders.h; sourceTree = SOURCE_ROOT; };
 		3A846FE71A0B4E0D00D2784E /* AATransientHashMapPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATransientHashMapPrivate.h; sourceTree = "<group>"; };
 		3A846FEA1A0B4E1A00D2784E /* AABaseHashMapPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseHashMapPrivate.h; sourceTree = "<group>"; };
 		3A846FEB1A0B508F00D2784E /* AAPersistentSetPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPersistentSetPrivate.h; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 				3A588B8619DFADAA00746226 /* AABool.m */,
 				3A29EC5C19DC72F0006643CB /* AAOwner.h */,
 				3A29EC5D19DC72F0006643CB /* AAOwner.m */,
-				3A588B9E19DFD8ED00746226 /* Persistent-Prefix.pch */,
+				3A588B9E19DFD8ED00746226 /* AAPersistentSharedHeaders.h */,
 			);
 			path = Persistent;
 			sourceTree = "<group>";
