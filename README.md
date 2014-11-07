@@ -108,7 +108,9 @@ AAPersistentHashMap *map1 = [[AAPersistentHashMap alloc] init];
 AAPersistentHashMap *map2 = [AAPersistentHashMap empty];
 
 // Or you can load a dictionary into it during initialization:
-AAPersistentHashMap *map = [[AAPersistentHashMap alloc] initWithDictionary:@{@1: @2, @3: @4}];
+AAPersistentHashMap *map = [[AAPersistentHashMap alloc]
+    initWithDictionary:@{@1: @2, @3: @4}
+];
 
 /// CRUD operations
 [map objectForKey:@1]; // => @2
@@ -175,7 +177,9 @@ AAPersistentSet *set1 = [[AAPersistentSet alloc] init];
 AAPersistentSet *set2 = [AAPersistentSet empty];
 
 // Or you can load an array into it during initialization:
-AAPersistentSet *set = [[AAPersistentSet alloc] initWithSet:[NSSet setWithObjects:@1, @2, @3, nil]];
+AAPersistentSet *set = [[AAPersistentSet alloc]
+    initWithSet:[NSSet setWithObjects:@1, @2, @3, nil]
+];
 
 /// CRUD operations
 [set containsObject:@1]; // => YES
@@ -224,6 +228,26 @@ for (NSUInteger i = 0; i < 100; i += 1) {
 set = [transientVector asPersistent];
 ```
 
+## Performance
+
+Tested in a pretty naive way - made the following operations with 1000000 records and compared the results. Used transients for persistent data structures where possible. I tested on my MacbookPro i7 2.7GHz with 16GB RAM.
+
+### HashMap / Set
+
+It's slower than NSMutableDictionary:
+
+* ~20x (6.893s / 0.329s) for setObject:ForKey:
+* ~15x (3.853s / 0.233s) for objectForKey:
+* ~15x (1.243s / 0.074s) for iteration (with for-in for NSMutableDictionary and `each:` for AAPersistentHashMap)
+
+### Vector
+
+It's slower than NSMutableArray:
+
+* ~100x (4.074s / 0.048s) for addObject:
+* ~100x (1.169s / 0.011s) for objectForKey:
+* ~120x (5.24s / 0.042s) for iteration (with for-in for NSMutableDictionary and `each:` for AAPersistentVector)
+
 ## Not really production ready
 
 These data structures are not really production ready, they are not thoroughly tested so far. But you are more than encouraged to try it out and tell me if you find any bugs or want any additional features :) Pull Requests are also very welcomed.
@@ -233,7 +257,3 @@ These data structures are not really production ready, they are not thoroughly t
 * [Why Persistent Data Structures are cool](https://github.com/vacuumlabs/persistent#got-it-and-it-is-cool-because)
 * [How Persistent Vectors work](http://hypirion.com/musings/understanding-persistent-vector-pt-1)
 * [How Persistent Hash Maps work](http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html)
-
-## TODO
-
-* Wrap it into CocoaPod
