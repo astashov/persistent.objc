@@ -1,6 +1,6 @@
 ## Persistent Data Structures for Objective-C
 
-The goal of this project is to implement [persistent data structures](http://en.wikipedia.org/wiki/Persistent_data_structure) for Objective-C.
+The goal of this project is to implement [persistent data structures](http://en.wikipedia.org/wiki/Persistent_data_structure) for Objective-C. Right now, there are Vector, Set and HashMap.
 
 ### [Vector](https://github.com/astashov/persistent.objc/blob/master/Persistent/Headers/AAPersistentVector.h)
 
