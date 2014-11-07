@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A29EC4A19DC5E0E006643CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC4919DC5E0E006643CB /* main.m */; };
-		3A29EC5419DC5E58006643CB /* AABaseVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5319DC5E58006643CB /* AABaseVector.m */; };
 		3A29EC5A19DC7251006643CB /* AAVNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5919DC7251006643CB /* AAVNode.m */; };
 		3A29EC5E19DC72F0006643CB /* AAOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5D19DC72F0006643CB /* AAOwner.m */; };
 		3A588B8719DFADAA00746226 /* AABool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8619DFADAA00746226 /* AABool.m */; };
@@ -16,7 +15,6 @@
 		3A588B8D19DFCC9F00746226 /* AAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */; };
 		3A588B9819DFD56500746226 /* PersistentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B9719DFD56500746226 /* PersistentTests.m */; };
 		3A588B9D19DFD58A00746226 /* AAPersistentVectorClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */; };
-		3A588B9F19E055B100746226 /* AABaseVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5319DC5E58006643CB /* AABaseVector.m */; };
 		3A588BA019E055BB00746226 /* AAVNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5919DC7251006643CB /* AAVNode.m */; };
 		3A588BA119E055BB00746226 /* AAOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5D19DC72F0006643CB /* AAOwner.m */; };
 		3A588BA219E055BB00746226 /* AABool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8619DFADAA00746226 /* AABool.m */; };
@@ -25,6 +23,8 @@
 		3A846FF21A0B5C1000D2784E /* AAVectorIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF11A0B5C1000D2784E /* AAVectorIterator.m */; };
 		3A846FF31A0B5C1300D2784E /* AAVectorIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF11A0B5C1000D2784E /* AAVectorIterator.m */; };
 		3A846FF61A0BF3D700D2784E /* AASameHashObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF51A0BF3D700D2784E /* AASameHashObject.m */; };
+		3A846FF91A0C475A00D2784E /* AABaseVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF81A0C475A00D2784E /* AABaseVector.m */; };
+		3A846FFA1A0C475A00D2784E /* AABaseVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A846FF81A0C475A00D2784E /* AABaseVector.m */; };
 		3AB37F8A1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */; };
 		3AB37F8B1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */; };
 		3AB37F921A0A0A25007D4F09 /* AAMapArrayNodeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37F911A0A0A25007D4F09 /* AAMapArrayNodeIterator.m */; };
@@ -71,7 +71,6 @@
 		3A29EC4619DC5E0E006643CB /* Persistent */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Persistent; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A29EC4919DC5E0E006643CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A29EC5219DC5E58006643CB /* AABaseVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseVector.h; sourceTree = "<group>"; };
-		3A29EC5319DC5E58006643CB /* AABaseVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AABaseVector.m; sourceTree = "<group>"; };
 		3A29EC5819DC7251006643CB /* AAVNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAVNode.h; sourceTree = "<group>"; };
 		3A29EC5919DC7251006643CB /* AAVNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAVNode.m; sourceTree = "<group>"; };
 		3A29EC5C19DC72F0006643CB /* AAOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAOwner.h; path = Vector/AAOwner.h; sourceTree = "<group>"; };
@@ -86,7 +85,7 @@
 		3A588B9619DFD56500746226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A588B9719DFD56500746226 /* PersistentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentTests.m; sourceTree = "<group>"; };
 		3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVectorClass.m; sourceTree = "<group>"; };
-		3A588B9E19DFD8ED00746226 /* AAPersistentSharedHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPersistentSharedHeaders.h; sourceTree = SOURCE_ROOT; };
+		3A588B9E19DFD8ED00746226 /* AAPersistentSharedHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPersistentSharedHeaders.h; path = Persistent/AAPersistentSharedHeaders.h; sourceTree = SOURCE_ROOT; };
 		3A846FE71A0B4E0D00D2784E /* AATransientHashMapPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATransientHashMapPrivate.h; sourceTree = "<group>"; };
 		3A846FEA1A0B4E1A00D2784E /* AABaseHashMapPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseHashMapPrivate.h; sourceTree = "<group>"; };
 		3A846FEB1A0B508F00D2784E /* AAPersistentSetPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPersistentSetPrivate.h; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		3A846FF41A0BF3D700D2784E /* AASameHashObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASameHashObject.h; sourceTree = "<group>"; };
 		3A846FF51A0BF3D700D2784E /* AASameHashObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASameHashObject.m; sourceTree = "<group>"; };
 		3A846FF71A0C009500D2784E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A846FF81A0C475A00D2784E /* AABaseVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AABaseVector.m; sourceTree = "<group>"; };
 		3AB37F881A09DC2E007D4F09 /* AAMapNodeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMapNodeIterator.h; sourceTree = "<group>"; };
 		3AB37F891A09DC2E007D4F09 /* AAMapNodeIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMapNodeIterator.m; sourceTree = "<group>"; };
 		3AB37F8C1A09F3C3007D4F09 /* AAIIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAIIterator.h; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 			children = (
 				3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */,
 				3A588B8919DFCB8500746226 /* AATransientVector.m */,
-				3A29EC5319DC5E58006643CB /* AABaseVector.m */,
+				3A846FF81A0C475A00D2784E /* AABaseVector.m */,
 				3A29EC5819DC7251006643CB /* AAVNode.h */,
 				3A29EC5919DC7251006643CB /* AAVNode.m */,
 				3A846FF01A0B5C1000D2784E /* AAVectorIterator.h */,
@@ -378,6 +378,7 @@
 				3AF8837F1A08840000687633 /* AABaseSet.m in Sources */,
 				3AF883721A06F08E00687633 /* AATransientHashMap.m in Sources */,
 				3AF8835C19FB7B7C00687633 /* AABitmapIndexedNode.m in Sources */,
+				3A846FF91A0C475A00D2784E /* AABaseVector.m in Sources */,
 				3A588B8719DFADAA00746226 /* AABool.m in Sources */,
 				3A29EC5E19DC72F0006643CB /* AAOwner.m in Sources */,
 				3AB37F961A0AB43A007D4F09 /* AASetIterator.m in Sources */,
@@ -389,7 +390,6 @@
 				3A588B8D19DFCC9F00746226 /* AAPersistentVector.m in Sources */,
 				3A29EC5A19DC7251006643CB /* AAVNode.m in Sources */,
 				3AF883651A00AF9F00687633 /* AAHashCollisionNode.m in Sources */,
-				3A29EC5419DC5E58006643CB /* AABaseVector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +397,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A588B9F19E055B100746226 /* AABaseVector.m in Sources */,
 				3AF883731A06F08E00687633 /* AATransientHashMap.m in Sources */,
 				3AB37F8B1A09DC2E007D4F09 /* AAMapNodeIterator.m in Sources */,
 				3AF883681A00B5D300687633 /* AABitmapIndexedNode.m in Sources */,
@@ -406,6 +405,7 @@
 				3A588B9D19DFD58A00746226 /* AAPersistentVectorClass.m in Sources */,
 				3A588BA019E055BB00746226 /* AAVNode.m in Sources */,
 				3A588BA119E055BB00746226 /* AAOwner.m in Sources */,
+				3A846FFA1A0C475A00D2784E /* AABaseVector.m in Sources */,
 				3AF8836B1A00B5D300687633 /* AAHashCollisionNode.m in Sources */,
 				3A588B9819DFD56500746226 /* PersistentTests.m in Sources */,
 				3AF8836A1A00B5D300687633 /* AAArrayNode.m in Sources */,

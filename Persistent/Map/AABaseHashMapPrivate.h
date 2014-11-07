@@ -22,7 +22,6 @@
 -(AABaseHashMap *)ensureOwner:(AAOwner *)owner;
 
 @property(nonatomic) NSUInteger count;
-@property(nonatomic) NSUInteger hash;
 @property id<AAINode> root;
 @property AAOwner *owner;
 @property BOOL altered;

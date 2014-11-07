@@ -27,6 +27,5 @@
 -(NSDictionary *)toDictionary;
 
 @property(readonly, nonatomic) NSUInteger count;
-@property(readonly, nonatomic) NSUInteger hash;
 
 @end

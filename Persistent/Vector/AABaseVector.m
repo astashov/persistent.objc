@@ -27,7 +27,7 @@
         self.tail = self.root;
         self.level = SHIFT;
         self.count = 0;
-        self.hash = 0;
+        _hash = 0;
     }
     return self;
 }
@@ -65,7 +65,7 @@
             return [[AAPersistentVector alloc] initWithSize:self.count level:self.level root:newRoot tail:newTail];
         }
     } else {
-        NSString *format = self.count == 0 ? @"empty vector" : [NSString stringWithFormat:@"[0 .. %lu]", self.count - 1];
+        NSString *format = self.count == 0 ? @"empty vector" : [NSString stringWithFormat:@"[0 .. %lu]", (unsigned long)self.count - 1];
         [NSException raise:NSRangeException format:@"index %lu beyond bounds for %@", (unsigned long)index, format];
     }
     return nil;
