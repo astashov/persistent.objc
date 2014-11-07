@@ -2,6 +2,18 @@
 
 The goal of this project is to implement [persistent data structures](http://en.wikipedia.org/wiki/Persistent_data_structure) for Objective-C. Right now, there are Vector, Set and HashMap.
 
+## Install
+
+With CocoaPods, as easy as adding
+
+```ruby
+pod 'Persistent'
+```
+
+to your `Podfile`.
+
+## Usage
+
 ### [Vector](https://github.com/astashov/persistent.objc/blob/master/Persistent/Headers/AAPersistentVector.h)
 
 For now, it's a port of [Clojure's PersistentVector](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/PersistentVector.java) and [Dart's Persistent Vector](https://github.com/vacuumlabs/persistent/blob/master/lib/src/vector_impl.dart). It's a persistent bit-partitioned vector trie, and it uses the same optimizations, which are used in Clojure and Dart - tails and transients.
