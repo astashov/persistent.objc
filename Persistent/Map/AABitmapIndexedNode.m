@@ -196,7 +196,9 @@
         id keyOrNull = self.array[i];
         id valOrNode = self.array[i + 1];
         if ([keyOrNull isEqual:[AANullNode node]]) {
-            [valOrNode each:block];
+            if (![valOrNode isEqual:[AANullNode node]]) {
+                [valOrNode each:block];
+            }
         } else {
             block(keyOrNull, valOrNode);
         }

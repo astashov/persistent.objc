@@ -50,7 +50,7 @@ while (iterator) {
     iterator = [iterator next];
 }
 
-// With each
+// With each (fastest way)
 [vector each:^(id value) {
     // going to iterate through values with `value` = @1, @2 and @5
 }];
@@ -81,9 +81,136 @@ It's also a port of [Clojure's PersistentHashMap](https://github.com/clojure/clo
 Main methods are `objectForKey:`, `setObject:forKey`, and `removeObjectForKey:`, allowing you to add, modify, read and delete keys and values from the map.
 Also, it has the `withTransient` method too, allowing to make bulk operations with the map faster.
 
+#### Examples
+
+```objc
+#import "AAPersistentHashMap.h"
+#import "AATransientHashMap.h"
+#import "AAIIterator.h"
+
+/// Initialization
+
+AAPersistentHashMap *map1 = [[AAPersistentHashMap alloc] init];
+
+// But if you need a persistent empty map, better use the pre-created empty one.
+AAPersistentHashMap *map2 = [AAPersistentHashMap empty];
+
+// Or you can load a dictionary into it during initialization:
+AAPersistentHashMap *map = [[AAPersistentHashMap alloc] initWithDictionary:@{@1: @2, @3: @4}];
+
+/// CRUD operations
+[map objectForKey:@1]; // => @2
+map = [map setObject:@6 forKey:@5]; // => map with @1: @2, @3: @4, @5: @6
+map = [map removeObjectForKey:@3]; // => map with @1: @2, @5: @6
+
+/// Convert to NSDictionary
+[map toDictionary]; // => @{@1: @2, @5: @6}
+
+/// Iterating
+
+// With Fast Enumeration
+for (id value in map) {
+    // going to iterate through values with `value` = @1 and @5
+}
+
+// With Iterator
+id<AAIIterator> iterator = [map iterator];
+while (iterator) {
+    [iterator first]; // => @[@1, @2] and @[@5, @6]
+    iterator = [iterator next];
+}
+
+// With each (fastest way)
+[map each:^(id key, id value) {
+    // going to iterate through keys and values
+}];
+
+/// Transients
+
+// Efficiently set 100 objects in the map. Will be ~10 times faster than
+// adding without transient
+[map withTransient:^(AATransientHashMap *transient) {
+    for (NSUInteger i = 0; i < 100; i += 1) {
+        transient = [transient setObject:@(i + 1) forKey:@(i)];
+    }
+    return transient;
+}];
+
+// You can also do that without a block, if you want
+AATransientHashMap *transientMap = [map asTransient];
+for (NSUInteger i = 0; i < 100; i += 1) {
+    transientMap = [transientMap setObject:@(i + 1) forKey:@(i)];
+}
+map = [transientMap asPersistent];
+```
+
 ### [Set](https://github.com/astashov/persistent.objc/blob/master/Persistent/Headers/AAPersistentSet.h)
 
 It's just a proxy on top of `AAPersistentHashMap`, implementing set functionality on top of persistent hash map.
+
+#### Examples
+
+```objc
+#import "AAPersistentSet.h"
+#import "AATransientSet.h"
+#import "AAIIterator.h"
+
+/// Initialization
+
+AAPersistentSet *set1 = [[AAPersistentSet alloc] init];
+
+// But if you need a persistent empty vector, better use the pre-created empty one.
+AAPersistentSet *set2 = [AAPersistentSet empty];
+
+// Or you can load an array into it during initialization:
+AAPersistentSet *set = [[AAPersistentSet alloc] initWithSet:[NSSet setWithObjects:@1, @2, @3, nil]];
+
+/// CRUD operations
+[set containsObject:@1]; // => YES
+set = [set addObject:@4]; // => set with @1, @2, @3, @4
+set = [set addObject:@3]; // => set with @1, @2, @3, @4
+set = [set removeObject:@3]; // => set with @1, @2, @4
+
+/// Convert to NSSet
+[set toSet]; // => NSSet with @1, @2 and @4
+
+/// Iterating
+
+// With Fast Enumeration
+for (id value in set) {
+    // going to iterate through values with `value` = @1, @2 and @4
+}
+
+// With Iterator
+id<AAIIterator> iterator = [set iterator];
+while (iterator) {
+    [iterator first]; // => @1, @2 and @4
+    iterator = [iterator next];
+}
+
+// With each (fastest way)
+[set each:^(id value) {
+    // going to iterate through values with `value` = @1, @2 and @4
+}];
+
+/// Transients
+
+// Efficiently add 100 objects to the set. Will be ~10 times faster than
+// adding without transient
+[set withTransient:^(AATransientSet *transient) {
+    for (NSUInteger i = 0; i < 100; i += 1) {
+        transient = [transient addObject:@(i)];
+    }
+    return transient;
+}];
+
+// You can also do that without a block, if you want
+AATransientSet *transientVector = [set asTransient];
+for (NSUInteger i = 0; i < 100; i += 1) {
+    transientVector = [transientVector addObject:@(i)];
+}
+set = [transientVector asPersistent];
+```
 
 ## Not really production ready
 
