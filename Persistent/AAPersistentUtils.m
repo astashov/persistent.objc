@@ -1,43 +1,33 @@
 //
-//  AAPersistentSharedHeaders.h
+//  AAPersistentUtils.m
 //  Persistent
 //
-//  Created by Anton Astashov on 04/10/14.
+//  Created by Anton Astashov on 08/11/14.
 //  Copyright (c) 2014 Anton Astashov. All rights reserved.
 //
 
-#import "AAVNode.h"
-#import "AABitmapIndexedNode.h"
-#import "AAHashCollisionNode.h"
-#import "AABool.h"
+#import "AAPersistentUtils.h"
 
-#ifndef Persistent_Shared_Headers
-#define Persistent_Shared_Headers
-
-static const NSUInteger SHIFT = 5;
-static const NSUInteger SIZE = 1 << SHIFT;
-static const NSUInteger MASK = SIZE - 1;
-
-static AAVNode *maybeCopyVNode(AAVNode *node, AAOwner *owner) {
+AAVNode *maybeCopyVNode(AAVNode *node, AAOwner *owner) {
     if (owner != nil && node != nil && owner == node.owner) {
         return node;
     } else {
         return [[AAVNode alloc]
-            initWithArray: (node != nil ? [NSMutableArray arrayWithArray:node.array] : [NSMutableArray array])
-            andOwner: owner
-        ];
+                initWithArray: (node != nil ? [NSMutableArray arrayWithArray:node.array] : [NSMutableArray array])
+                andOwner: owner
+                ];
     }
 }
 
-static NSUInteger mask(NSUInteger hash, NSUInteger shift) {
+NSUInteger mask(NSUInteger hash, NSUInteger shift) {
     return (hash >> shift) & MASK;
 }
 
-static NSUInteger bitpos(NSUInteger hash, NSUInteger shift) {
+NSUInteger bitpos(NSUInteger hash, NSUInteger shift) {
     return 1 << mask(hash, shift);
 }
 
-static id<AAINode> createNode(NSUInteger shift, id key1, id val1, id key2, id val2, AAOwner *owner) {
+id<AAINode> createNode(NSUInteger shift, id key1, id val1, id key2, id val2, AAOwner *owner) {
     NSUInteger key1hash = [key1 hash];
     NSUInteger key2hash = [key2 hash];
     if (key1hash == key2hash) {
@@ -46,13 +36,13 @@ static id<AAINode> createNode(NSUInteger shift, id key1, id val1, id key2, id va
     } else {
         AABool *didAddLeaf = [[AABool alloc] init];
         return [[[AABitmapIndexedNode empty]
-                    set:key1 withValue:val1 shift:shift didAddLeaf:didAddLeaf owner:owner]
-                    set:key2 withValue:val2 shift:shift didAddLeaf:didAddLeaf owner:owner];
+                 set:key1 withValue:val1 shift:shift didAddLeaf:didAddLeaf owner:owner]
+                set:key2 withValue:val2 shift:shift didAddLeaf:didAddLeaf owner:owner];
 
     }
 }
 
-static NSString *ib(int intValue) {
+NSString *ib(int intValue) {
     int byteBlock = SHIFT;
     int totalBits = SIZE;
     int binaryDigit = 1;
@@ -76,13 +66,13 @@ static NSString *ib(int intValue) {
 
 // Jenkins hash functions
 
-static NSUInteger hashCombine(NSUInteger hash, NSUInteger value) {
+NSUInteger hashCombine(NSUInteger hash, NSUInteger value) {
     hash = 0x1fffffff & (hash + value);
     hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
     return hash ^ (hash >> 6);
 }
 
-static NSUInteger finish(NSUInteger hash) {
+NSUInteger finish(NSUInteger hash) {
     hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
     hash = hash ^ (hash >> 11);
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
@@ -90,12 +80,10 @@ static NSUInteger finish(NSUInteger hash) {
 
 //
 
-static NSUInteger hashObjects(NSObject<NSFastEnumeration> *objects) {
+NSUInteger hashObjects(NSObject<NSFastEnumeration> *objects) {
     NSUInteger hash = 0;
     for (id object in objects) {
         hash = hashCombine(hash, [object hash]);
     }
     return finish(hash);
 }
-
-#endif
