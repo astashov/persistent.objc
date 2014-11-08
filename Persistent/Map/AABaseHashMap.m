@@ -13,6 +13,7 @@
 #import "AAPersistentHashMap.h"
 #import "AATransientHashMap.h"
 #import "AAOwner.h"
+#import "AAPersistentFunctions.h"
 
 @implementation AABaseHashMap
 
@@ -121,6 +122,18 @@
         dictionary[key] = value;
     }];
     return [[NSDictionary alloc] initWithDictionary:dictionary];
+}
+
+-(id)objectAt:(NSArray *)path {
+    return objectAt(self, path);
+}
+
+-(instancetype)insertAt:(NSArray *)path withValue:(id)value {
+    return (AABaseHashMap *)insertAt(self, path, value);
+}
+
+-(instancetype)removeAt:(NSArray *)path {
+    return (AABaseHashMap *)removeAt(self, path);
 }
 
 # pragma mark Private Methods

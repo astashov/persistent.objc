@@ -228,6 +228,50 @@ for (NSUInteger i = 0; i < 100; i += 1) {
 set = [transientVector asPersistent];
 ```
 
+## Converting nested stuctures to persistent ones and back to regular ones
+
+There are 2 functions, defined in "AAPersistentFunctions.h" - `persist` and `unpersist`. They allow to convert regular nested arrays/dictionaries/sets into persistent vectors/maps/sets, like this:
+
+```objc
+AAPersistentHashMap *map = (AAPersistentHashMap *)persist(
+    @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]}
+);
+```
+
+and also back:
+
+```objc
+NSDictionary *dict = (NSDictionary *)unpersist(map);
+```
+
+## Nested CRUD
+
+It is often your data structures look like a tree (or JSON structure), with nested dictionaries and arrays.
+Since the structures are immutable, you cannot simply do something like:
+
+```objc
+AAPersistentHashMap *map = (AAPersistentHashMap *)persist(
+    @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]}
+);
+map[@"bla"][1][@"abc"] = @"new_value"; // Obviously won't work
+```
+
+So, there are convenience methods `objectAt:`, `insertAt:withValue:` and `removeAt:` exactly for these cases.
+It works like this:
+
+```objc
+AAPersistentHashMap *map = (AAPersistentHashMap *)persist(
+    @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]}
+);
+NSString *value = [map objectAt:@[@"bla", @1, @"abc"]]; // => @"def"
+
+AAPersistentHashMap *map1 = [map insertAt:@[@"bla", @1, @"abc"] withValue:@"new one"];
+// Map1 is @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"new one"}]}
+
+AAPersistentHashMap *map2 = [map removeAt:@[@"bla", @1, @"abc"]];
+// Map2 is @{@"foo": @"bar", @"bla": @[@"zoo"]}
+```
+
 ## Performance
 
 Tested in a pretty naive way - made the following operations with 1000000 records and compared the results. Used transients for persistent data structures where possible. I tested on my MacbookPro i7 2.7GHz with 16GB RAM.

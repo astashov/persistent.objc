@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AAIIterator.h"
+#import "AAIPersistent.h"
 
 // Abstract class
-@interface AABaseSet : NSObject <NSFastEnumeration>
+@interface AABaseSet : NSObject <NSFastEnumeration, AAIPersistent>
 
 -(BOOL)containsObject:(id)anObject;
 -(instancetype)addObject:(id)anObject;

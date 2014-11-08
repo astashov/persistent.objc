@@ -16,6 +16,7 @@
 #import "AABool.h"
 #import "AAOwner.h"
 #import "AAVectorIterator.h"
+#import "AAPersistentFunctions.h"
 
 @implementation AABaseVector
 
@@ -132,6 +133,18 @@
     } else {
         return [[AATransientVector alloc] initWithSize:self.count level:self.level root:self.root tail:self.tail owner:owner];
     }
+}
+
+-(id)objectAt:(NSArray *)path {
+    return objectAt(self, path);
+}
+
+-(instancetype)insertAt:(NSArray *)path withValue:(id)value {
+    return (AABaseVector *)insertAt(self, path, value);
+}
+
+-(instancetype)removeAt:(NSArray *)path {
+    return (AABaseVector *)removeAt(self, path);
 }
 
 # pragma mark Private Methods

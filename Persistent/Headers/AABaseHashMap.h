@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AAIIterator.h"
+#import "AAIPersistent.h"
 
 // Abstract class
-@interface AABaseHashMap : NSObject <NSFastEnumeration>
+@interface AABaseHashMap : NSObject <NSFastEnumeration, AAIPersistent>
 
 -(id)objectForKey:(id)key;
 -(instancetype)setObject:(id)key forKey:(id)value;
@@ -25,6 +26,10 @@
 -(id<AAIIterator>)iterator;
 
 -(NSDictionary *)toDictionary;
+
+-(id)objectAt:(NSArray *)path;
+-(instancetype)insertAt:(NSArray *)path withValue:(id)value;
+-(instancetype)removeAt:(NSArray *)path;
 
 @property(readonly, nonatomic) NSUInteger count;
 

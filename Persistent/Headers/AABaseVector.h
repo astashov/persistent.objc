@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AAIIterator.h"
+#import "AAIPersistent.h"
 
 // Abstract class
-@interface AABaseVector : NSObject <NSFastEnumeration>
+@interface AABaseVector : NSObject <NSFastEnumeration, AAIPersistent>
 
 -(id)objectAtIndex:(NSUInteger)index;
 -(instancetype)replaceObjectAtIndex:(NSUInteger)index withObject:(id)value;
@@ -28,6 +29,10 @@
 -(BOOL)isEqualToVector:(AABaseVector *)vector;
 
 -(id<AAIIterator>)iterator;
+
+-(id)objectAt:(NSArray *)path;
+-(instancetype)insertAt:(NSArray *)path withValue:(id)value;
+-(instancetype)removeAt:(NSArray *)path;
 
 @property(readonly, nonatomic) NSUInteger count;
 
