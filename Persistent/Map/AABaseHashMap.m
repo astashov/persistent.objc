@@ -78,6 +78,10 @@
     return [a description];
 }
 
+-(NSString *)description {
+    return [[self toDictionary] description];
+}
+
 -(void)each:(void(^)(id, id))block {
     [self.root each:block];
 }

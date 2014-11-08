@@ -52,6 +52,10 @@
     return [NSSet setWithSet:set];
 }
 
+-(NSString *)description {
+    return [[self toSet] description];
+}
+
 -(NSUInteger)hash {
     return self.hashMap.hash;
 }
