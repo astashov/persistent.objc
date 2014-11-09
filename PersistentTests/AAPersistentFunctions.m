@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "AAPersistentFunctions.h"
-#import "AAPersistentHashMap.h"
+#import "AAPersistent.h"
 
 @interface AAPersistentFunctions : XCTestCase
 @end

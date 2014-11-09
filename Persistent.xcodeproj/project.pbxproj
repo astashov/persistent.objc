@@ -77,6 +77,7 @@
 		3A1AAA061A0DE812000D9D39 /* AAPersistentFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentFunctions.m; sourceTree = "<group>"; };
 		3A1AAA081A0EA212000D9D39 /* AAPersistentUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentUtils.m; sourceTree = "<group>"; };
 		3A1AAA0B1A0EAE98000D9D39 /* Persistent.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Persistent.podspec; sourceTree = "<group>"; };
+		3A1AAA1F1A1007CC000D9D39 /* AAPersistent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPersistent.h; sourceTree = "<group>"; };
 		3A29EC4619DC5E0E006643CB /* Persistent */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Persistent; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A29EC4919DC5E0E006643CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A29EC5219DC5E58006643CB /* AABaseVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABaseVector.h; sourceTree = "<group>"; };
@@ -281,6 +282,7 @@
 				3A29EC5219DC5E58006643CB /* AABaseVector.h */,
 				3AB37F8C1A09F3C3007D4F09 /* AAIIterator.h */,
 				3AAF01301A0DCCD300ECB260 /* AAPersistentFunctions.h */,
+				3A1AAA1F1A1007CC000D9D39 /* AAPersistent.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";

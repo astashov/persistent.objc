@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "AAPersistentSet.h"
-#import "AATransientSet.h"
+#import "AAPersistent.h"
 
 @interface AAPersistentSetClass : XCTestCase
 

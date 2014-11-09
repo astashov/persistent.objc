@@ -25,9 +25,7 @@ It doesn't have methods for inserting/removing elements in the middle of the vec
 #### Examples
 
 ```objc
-#import "AAPersistentVector.h"
-#import "AATransientVector.h"
-#import "AAIIterator.h"
+#import "AAPersistent.h"
 
 /// Initialization
 
@@ -96,9 +94,7 @@ Also, it has the `withTransient` method too, allowing to make bulk operations wi
 #### Examples
 
 ```objc
-#import "AAPersistentHashMap.h"
-#import "AATransientHashMap.h"
-#import "AAIIterator.h"
+#import "AAPersistent.h"
 
 /// Initialization
 
@@ -165,9 +161,7 @@ It's just a proxy on top of `AAPersistentHashMap`, implementing set functionalit
 #### Examples
 
 ```objc
-#import "AAPersistentSet.h"
-#import "AATransientSet.h"
-#import "AAIIterator.h"
+#import "AAPersistent.h"
 
 /// Initialization
 

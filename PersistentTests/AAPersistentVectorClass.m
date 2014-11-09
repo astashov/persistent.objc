@@ -8,9 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "AAPersistentVector.h"
-#import "AATransientVector.h"
-#import "AAIIterator.h"
+#import "AAPersistent.h"
 
 @interface AAPersistentVectorClass : XCTestCase
 @end

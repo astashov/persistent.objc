@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "AAPersistentHashMap.h"
-#import "AATransientHashMap.h"
+#import "AAPersistent.h"
 #import "AASameHashObject.h"
 
 @interface AAPersistentHashMapClass : XCTestCase
