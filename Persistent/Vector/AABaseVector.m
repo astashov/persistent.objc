@@ -139,12 +139,16 @@
     return objectAt(self, path);
 }
 
--(instancetype)insertAt:(NSArray *)path withValue:(id)value {
+-(instancetype)setAt:(NSArray *)path withValue:(id)value {
     return (AABaseVector *)insertAt(self, path, value);
 }
 
 -(instancetype)removeAt:(NSArray *)path {
     return (AABaseVector *)removeAt(self, path);
+}
+
+-(instancetype)addAt:(NSArray *)path withValue:(id)value {
+    return (AABaseVector *)addAt(self, path, value);
 }
 
 # pragma mark Private Methods

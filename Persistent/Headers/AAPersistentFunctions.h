@@ -14,3 +14,4 @@ id unpersist(id object);
 id objectAt(id object, NSArray *path);
 id<AAIPersistent> insertAt(id<AAIPersistent> object, NSArray *path, id value);
 id<AAIPersistent> removeAt(id<AAIPersistent> object, NSArray *path);
+id<AAIPersistent> addAt(id<AAIPersistent> object, NSArray *path, id value);

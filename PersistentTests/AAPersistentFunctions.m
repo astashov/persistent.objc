@@ -29,7 +29,7 @@
 
 -(void)testInsert {
     AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]});
-    map = [map insertAt:@[@"bla", @1, @"abc"] withValue:@"deg"];
+    map = [map setAt:@[@"bla", @1, @"abc"] withValue:@"deg"];
     XCTAssertEqualObjects(objectAt(map, @[@"bla", @1, @"abc"]), @"deg");
 }
 
@@ -37,6 +37,19 @@
     AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]});
     map = [map removeAt:@[@"bla", @1, @"abc"]];
     XCTAssertEqualObjects(objectAt(map, @[@"bla", @1, @"abc"]), nil);
+}
+
+-(void)testAdd {
+    AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @{@"bar": @[@"a", @"b"]}});
+    map = [map addAt:@[@"foo", @"bar"] withValue:@"c"];
+    id result = objectAt(map, @[@"foo", @"bar"]);
+    id expected = @[@"a", @"b", @"c"];
+    XCTAssertEqualObjects(unpersist(result), expected);
+}
+
+-(void)testFailAdd {
+    AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @{@"bar": @[@"a", @"b"]}});
+    XCTAssertThrows([map addAt:@[@"foo"] withValue:@"c"]);
 }
 
 @end

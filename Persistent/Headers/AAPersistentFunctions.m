@@ -89,24 +89,34 @@ id objectAt(id<AAIPersistent> object, NSArray *path) {
     }
 }
 
+typedef id<AAIPersistent> (^traverseBlock)(id<AAIPersistent>, NSArray *newPath);
+
+id traverse(id<AAIPersistent> object, NSArray *path, traverseBlock block) {
+    id segment = path[0];
+    NSMutableArray *mutablePath = [path mutableCopy];
+    [mutablePath removeObjectAtIndex:0];
+    path = [[NSArray alloc] initWithArray:mutablePath];
+
+    if ([object isKindOfClass:[AABaseHashMap class]]) {
+        id newObject = block([(AABaseHashMap *)object objectForKey:segment], path);
+        return [(AABaseHashMap *)object setObject:newObject forKey:segment];
+    } else if ([object isKindOfClass:[AABaseVector class]]) {
+        NSUInteger index = [(NSNumber *)segment unsignedIntegerValue];
+        id newObject = block([(AABaseVector *)object objectAtIndex:index], path);
+        return [(AABaseVector *)object replaceObjectAtIndex:index withObject:newObject];
+    } else {
+        [NSException raise:@"This should never happen" format:@"We should not call insertAt on %@", [object class]];
+        return nil;
+    }
+
+}
+
 id<AAIPersistent> insertAt(id<AAIPersistent> object, NSArray *path, id value) {
     id segment = path[0];
     if ([path count] > 1) {
-        NSMutableArray *mutablePath = [path mutableCopy];
-        [mutablePath removeObjectAtIndex:0];
-        path = [[NSArray alloc] initWithArray:mutablePath];
-
-        if ([object isKindOfClass:[AABaseHashMap class]]) {
-            id newObject = insertAt([(AABaseHashMap *)object objectForKey:segment], path, value);
-            return [(AABaseHashMap *)object setObject:newObject forKey:segment];
-        } else if ([object isKindOfClass:[AABaseVector class]]) {
-            NSUInteger index = [(NSNumber *)segment unsignedIntegerValue];
-            id newObject = insertAt([(AABaseVector *)object objectAtIndex:index], path, value);
-            return [(AABaseVector *)object replaceObjectAtIndex:index withObject:newObject];
-        } else {
-            [NSException raise:@"This should never happen" format:@"We should not call insertAt on %@", [object class]];
-            return nil;
-        }
+        return traverse(object, path, ^(id<AAIPersistent> nextObj, NSArray *newPath) {
+            return insertAt(nextObj, newPath, value);
+        });
     } else {
         if ([object isKindOfClass:[AABaseHashMap class]]) {
             return [(AABaseHashMap *)object setObject:value forKey:segment];
@@ -127,21 +137,9 @@ id<AAIPersistent> insertAt(id<AAIPersistent> object, NSArray *path, id value) {
 id<AAIPersistent> removeAt(id<AAIPersistent> object, NSArray *path) {
     id segment = path[0];
     if ([path count] > 1) {
-        NSMutableArray *mutablePath = [path mutableCopy];
-        [mutablePath removeObjectAtIndex:0];
-        path = [[NSArray alloc] initWithArray:mutablePath];
-
-        if ([object isKindOfClass:[AABaseHashMap class]]) {
-            id newObject = removeAt([(AABaseHashMap *)object objectForKey:segment], path);
-            return [(AABaseHashMap *)object setObject:newObject forKey:segment];
-        } else if ([object isKindOfClass:[AABaseVector class]]) {
-            NSUInteger index = [(NSNumber *)segment unsignedIntegerValue];
-            id newObject = removeAt([(AABaseVector *)object objectAtIndex:index], path);
-            return [(AABaseVector *)object replaceObjectAtIndex:index withObject:newObject];
-        } else {
-            [NSException raise:@"This should never happen" format:@"We should not call insertAt on %@", [object class]];
-            return nil;
-        }
+        return traverse(object, path, ^(id<AAIPersistent> nextObj, NSArray *newPath) {
+            return removeAt(nextObj, newPath);
+        });
     } else {
         if ([object isKindOfClass:[AABaseHashMap class]]) {
             return [(AABaseHashMap *)object removeObjectForKey:segment];
@@ -160,4 +158,18 @@ id<AAIPersistent> removeAt(id<AAIPersistent> object, NSArray *path) {
     }
 }
 
+id<AAIPersistent> addAt(id<AAIPersistent> object, NSArray *path, id value) {
+    if ([path count] > 0) {
+        return traverse(object, path, ^(id<AAIPersistent> nextObj, NSArray *newPath) {
+            return addAt(nextObj, newPath, value);
+        });
+    } else {
+        if ([object isKindOfClass:[AABaseVector class]]) {
+            return [(AABaseVector *)object addObject:value];
+        } else {
+            [NSException raise:@"addAt's path leads to not a vector" format:@"We should not call addAt on %@", [object class]];
+            return nil;
+        }
+    }
+}
 

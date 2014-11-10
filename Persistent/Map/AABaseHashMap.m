@@ -132,12 +132,16 @@
     return objectAt(self, path);
 }
 
--(instancetype)insertAt:(NSArray *)path withValue:(id)value {
+-(instancetype)setAt:(NSArray *)path withValue:(id)value {
     return (AABaseHashMap *)insertAt(self, path, value);
 }
 
 -(instancetype)removeAt:(NSArray *)path {
     return (AABaseHashMap *)removeAt(self, path);
+}
+
+-(instancetype)addAt:(NSArray *)path withValue:(id)value {
+    return (AABaseHashMap *)addAt(self, path, value);
 }
 
 # pragma mark Private Methods
