@@ -31,6 +31,7 @@
 -(instancetype)setAt:(NSArray *)path withValue:(id)value;
 -(instancetype)removeAt:(NSArray *)path;
 -(instancetype)addAt:(NSArray *)path withValue:(id)value;
+-(instancetype)insertAt:(NSArray *)path withValue:(id)value;
 
 @property(readonly, nonatomic) NSUInteger count;
 

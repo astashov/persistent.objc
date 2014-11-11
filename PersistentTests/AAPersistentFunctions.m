@@ -27,16 +27,32 @@
     XCTAssertEqualObjects(dict, result);
 }
 
--(void)testInsert {
+-(void)testSet {
     AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]});
     map = [map setAt:@[@"bla", @1, @"abc"] withValue:@"deg"];
     XCTAssertEqualObjects(objectAt(map, @[@"bla", @1, @"abc"]), @"deg");
+}
+
+-(void)testInsert {
+    AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @"bar", @"bla": @[@"zoo", @[@"a", @"c"]]});
+    map = [map insertAt:@[@"bla", @1, @1] withValue:@"b"];
+    id result = objectAt(map, @[@"bla", @1]);
+    id expected = @[@"a", @"b", @"c"];
+    XCTAssertEqualObjects(unpersist(result), expected);
 }
 
 -(void)testRemove {
     AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]});
     map = [map removeAt:@[@"bla", @1, @"abc"]];
     XCTAssertEqualObjects(objectAt(map, @[@"bla", @1, @"abc"]), nil);
+}
+
+-(void)testRemoveVector {
+    AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @"bar", @"bla": @[@"zoo", @[@"a", @"b", @"c"]]});
+    map = [map removeAt:@[@"bla", @1, @1]];
+    id result = objectAt(map, @[@"bla", @1]);
+    id expected = @[@"a", @"c"];
+    XCTAssertEqualObjects(unpersist(result), expected);
 }
 
 -(void)testAdd {

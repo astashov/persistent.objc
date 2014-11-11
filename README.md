@@ -250,20 +250,45 @@ AAPersistentHashMap *map = (AAPersistentHashMap *)persist(
 map[@"bla"][1][@"abc"] = @"new_value"; // Obviously won't work
 ```
 
-So, there are convenience methods `objectAt:`, `insertAt:withValue:` and `removeAt:` exactly for these cases.
+So, there are convenience methods `objectAt:`, `insertAt:withValue:`, `setAt:withValue`, `addAt:withValue` and `removeAt:` exactly for these cases.
 It works like this:
 
 ```objc
+/// objectAt:
 AAPersistentHashMap *map = (AAPersistentHashMap *)persist(
     @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}]}
 );
+AAPersistentHashMap *map1;
 NSString *value = [map objectAt:@[@"bla", @1, @"abc"]]; // => @"def"
 
-AAPersistentHashMap *map1 = [map insertAt:@[@"bla", @1, @"abc"] withValue:@"new one"];
+/// insertAt:withValue:
+map1 = [map insertAt:@[@"bla", @1, @"abc"] withValue:@"new one"];
 // Map1 is @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"new one"}]}
 
-AAPersistentHashMap *map2 = [map removeAt:@[@"bla", @1, @"abc"]];
+// It surely also works for vector, but very unefficient if inserted not at the last position
+map1 = [map insertAt:@[@"bla", @0] withValue:@"new one"];
+// Map1 is @{@"foo": @"bar", @"bla": @[@"new_one", @"zoo", @{@"abc": @"def"}]}
+
+/// removeAt:withValue:
+map2 = [map removeAt:@[@"bla", @1, @"abc"]];
 // Map2 is @{@"foo": @"bar", @"bla": @[@"zoo"]}
+
+// It surely also works for vector, but very unefficient if removed not at the last position
+map1 = [map removeAt:@[@"bla", @0]];
+// Map1 is @{@"foo": @"bar", @"bla": @[@{@"abc": @"def"}]}
+
+/// setAt:withValue:
+/// It's the same as insertAt:withValue for hashMap for a vector, but slightly different for a vector.
+/// For vector, it replaces the value at the index instead of inserting a new one
+
+map1 = [map setAt:@[@"bla", @0] withValue:@"new one"];
+// Map1 is @{@"foo": @"bar", @"bla": @[@"new_one", @{@"abc": @"def"}]}
+
+/// addAt:withValue:
+/// It only works for vectors, just adds a value to the end
+
+map1 = [map addAt:@[@"bla"] withValue:@"new one"];
+// Map1 is @{@"foo": @"bar", @"bla": @[@"zoo", @{@"abc": @"def"}, @"new one"]}
 ```
 
 ## Performance

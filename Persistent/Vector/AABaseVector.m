@@ -140,7 +140,7 @@
 }
 
 -(instancetype)setAt:(NSArray *)path withValue:(id)value {
-    return (AABaseVector *)insertAt(self, path, value);
+    return (AABaseVector *)setAt(self, path, value);
 }
 
 -(instancetype)removeAt:(NSArray *)path {
@@ -149,6 +149,10 @@
 
 -(instancetype)addAt:(NSArray *)path withValue:(id)value {
     return (AABaseVector *)addAt(self, path, value);
+}
+
+-(instancetype)insertAt:(NSArray *)path withValue:(id)value {
+    return (AABaseVector *)insertAt(self, path, value);
 }
 
 # pragma mark Private Methods

@@ -111,6 +111,29 @@ id traverse(id<AAIPersistent> object, NSArray *path, traverseBlock block) {
 
 }
 
+id<AAIPersistent> setAt(id<AAIPersistent> object, NSArray *path, id value) {
+    id segment = path[0];
+    if ([path count] > 1) {
+        return traverse(object, path, ^(id<AAIPersistent> nextObj, NSArray *newPath) {
+            return setAt(nextObj, newPath, value);
+        });
+    } else {
+        if ([object isKindOfClass:[AABaseHashMap class]]) {
+            return [(AABaseHashMap *)object setObject:value forKey:segment];
+        } else if ([object isKindOfClass:[AABaseVector class]]) {
+            NSUInteger index = [(NSNumber *)segment unsignedIntegerValue];
+            if ([(AABaseVector *)object count] == index) {
+                return [(AABaseVector *)object addObject:value];
+            } else {
+                return [(AABaseVector *)object replaceObjectAtIndex:index withObject:value];
+            }
+        } else {
+            [NSException raise:@"This should never happen" format:@"We should not call insertAt on %@", [object class]];
+            return nil;
+        }
+    }
+}
+
 id<AAIPersistent> insertAt(id<AAIPersistent> object, NSArray *path, id value) {
     id segment = path[0];
     if ([path count] > 1) {
@@ -125,7 +148,19 @@ id<AAIPersistent> insertAt(id<AAIPersistent> object, NSArray *path, id value) {
             if ([(AABaseVector *)object count] == index) {
                 return [(AABaseVector *)object addObject:value];
             } else {
-                return [(AABaseVector *)object replaceObjectAtIndex:index withObject:value];
+                AAPersistentVector *newVector = [AAPersistentVector empty];
+                return [newVector withTransient:^(AATransientVector *t) {
+                    __block AATransientVector *transient = t;
+                    __block NSUInteger i = 0;
+                    [(AAPersistentVector *)object each:^(id oldValue) {
+                        if (i == index) {
+                            transient = [transient addObject:value];
+                        }
+                        transient = [transient addObject:oldValue];
+                        i += 1;
+                    }];
+                    return transient;
+                }];
             }
         } else {
             [NSException raise:@"This should never happen" format:@"We should not call insertAt on %@", [object class]];
@@ -148,8 +183,18 @@ id<AAIPersistent> removeAt(id<AAIPersistent> object, NSArray *path) {
             if ([(AABaseVector *)object count] - 1 == index) {
                 return [(AABaseVector *)object removeLastObject];
             } else {
-                [NSException raise:@"Non-allowed operation" format: @"Cannot delete non last element in a vector %@", object];
-                return nil;
+                AAPersistentVector *newVector = [AAPersistentVector empty];
+                return [newVector withTransient:^(AATransientVector *t) {
+                    __block AATransientVector *transient = t;
+                    __block NSUInteger i = 0;
+                    [(AAPersistentVector *)object each:^(id oldValue) {
+                        if (i != index) {
+                            transient = [transient addObject:oldValue];
+                        }
+                        i += 1;
+                    }];
+                    return transient;
+                }];
             }
         } else {
             [NSException raise:@"This should never happen" format:@"We should not call insertAt on %@", [object class]];
