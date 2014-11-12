@@ -33,6 +33,9 @@
 -(instancetype)addAt:(NSArray *)path withValue:(id)value;
 -(instancetype)insertAt:(NSArray *)path withValue:(id)value;
 
+-(NSArray *)allKeys;
+-(NSArray *)allValues;
+
 @property(readonly, nonatomic) NSUInteger count;
 
 @end

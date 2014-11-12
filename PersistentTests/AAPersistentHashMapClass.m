@@ -176,6 +176,18 @@ static AASameHashObject *sameHashFoo(NSUInteger i) {
     XCTAssertEqualObjects([a toDictionary], result);
 }
 
+-(void)testAllKeys {
+    AAPersistentHashMap *a = [[AAPersistentHashMap alloc] initWithDictionary:@{@"a": @"b", @"c": @"d"}];
+    NSArray *result = @[@"a", @"c"];
+    XCTAssertEqualObjects([a allKeys], result);
+}
+
+-(void)testAllValues {
+    AAPersistentHashMap *a = [[AAPersistentHashMap alloc] initWithDictionary:@{@"a": @"b", @"c": @"d"}];
+    NSArray *result = @[@"b", @"d"];
+    XCTAssertEqualObjects([a allValues], result);
+}
+
 -(void)testAddObjectsWithSameHash {
     AAPersistentHashMap *a = [AAPersistentHashMap empty];
     for (int i = 0; i < 100; i += 1) { a = [a setObject:bar(i) forKey:foo(i)]; }

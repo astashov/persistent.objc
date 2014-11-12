@@ -148,6 +148,21 @@
     return (AABaseHashMap *)insertAt(self, path, value);
 }
 
+-(NSArray *)allKeys {
+    NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:self.count];
+    [self each:^(id key, id value) {
+        [arr addObject:key];
+    }];
+    return [[NSArray alloc] initWithArray:arr];
+}
+
+-(NSArray *)allValues {
+    NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:self.count];
+    [self each:^(id key, id value) {
+        [arr addObject:value];
+    }];
+    return [[NSArray alloc] initWithArray:arr];
+}
 
 # pragma mark Private Methods
 
