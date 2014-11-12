@@ -55,11 +55,19 @@
     XCTAssertEqualObjects(unpersist(result), expected);
 }
 
--(void)testAdd {
+-(void)testAddToVector {
     AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @{@"bar": @[@"a", @"b"]}});
     map = [map addAt:@[@"foo", @"bar"] withValue:@"c"];
     id result = objectAt(map, @[@"foo", @"bar"]);
     id expected = @[@"a", @"b", @"c"];
+    XCTAssertEqualObjects(unpersist(result), expected);
+}
+
+-(void)testAddToSet {
+    AAPersistentHashMap *map = (AAPersistentHashMap *)persist(@{@"foo": @{@"bar": [NSSet setWithObjects:@"a", @"b", nil]}});
+    map = [map addAt:@[@"foo", @"bar"] withValue:@"c"];
+    id result = objectAt(map, @[@"foo", @"bar"]);
+    id expected = [NSSet setWithObjects:@"a", @"b", @"c", nil];
     XCTAssertEqualObjects(unpersist(result), expected);
 }
 

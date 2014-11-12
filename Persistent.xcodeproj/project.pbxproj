@@ -17,7 +17,6 @@
 		3A588B8719DFADAA00746226 /* AABool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8619DFADAA00746226 /* AABool.m */; };
 		3A588B8A19DFCB8500746226 /* AATransientVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8919DFCB8500746226 /* AATransientVector.m */; };
 		3A588B8D19DFCC9F00746226 /* AAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */; };
-		3A588B9819DFD56500746226 /* PersistentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B9719DFD56500746226 /* PersistentTests.m */; };
 		3A588B9D19DFD58A00746226 /* AAPersistentVectorClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */; };
 		3A588BA019E055BB00746226 /* AAVNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5919DC7251006643CB /* AAVNode.m */; };
 		3A588BA119E055BB00746226 /* AAOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29EC5D19DC72F0006643CB /* AAOwner.m */; };
@@ -93,7 +92,6 @@
 		3A588B8C19DFCC9F00746226 /* AAPersistentVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVector.m; sourceTree = "<group>"; };
 		3A588B9319DFD56500746226 /* PersistentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersistentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A588B9619DFD56500746226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A588B9719DFD56500746226 /* PersistentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentTests.m; sourceTree = "<group>"; };
 		3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPersistentVectorClass.m; sourceTree = "<group>"; };
 		3A588B9E19DFD8ED00746226 /* AAPersistentUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPersistentUtils.h; path = Persistent/AAPersistentUtils.h; sourceTree = SOURCE_ROOT; };
 		3A846FE71A0B4E0D00D2784E /* AATransientHashMapPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATransientHashMapPrivate.h; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				3A588B9C19DFD58A00746226 /* AAPersistentVectorClass.m */,
 				3AF883661A00B4FA00687633 /* AAPersistentHashMapClass.m */,
 				3AF883891A0899B400687633 /* AAPersistentSetClass.m */,
-				3A588B9719DFD56500746226 /* PersistentTests.m */,
 				3A1AAA061A0DE812000D9D39 /* AAPersistentFunctions.m */,
 				3A588B9519DFD56500746226 /* Supporting Files */,
 			);
@@ -430,7 +427,6 @@
 				3A588BA119E055BB00746226 /* AAOwner.m in Sources */,
 				3A846FFA1A0C475A00D2784E /* AABaseVector.m in Sources */,
 				3AF8836B1A00B5D300687633 /* AAHashCollisionNode.m in Sources */,
-				3A588B9819DFD56500746226 /* PersistentTests.m in Sources */,
 				3AF8836A1A00B5D300687633 /* AAArrayNode.m in Sources */,
 				3AAF01331A0DCE4600ECB260 /* AAPersistentFunctions.m in Sources */,
 				3AF883841A08928200687633 /* AATransientSet.m in Sources */,
@@ -472,7 +468,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.1.4;
+				CURRENT_PROJECT_VERSION = 0.1.5;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -513,7 +509,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 0.1.4;
+				CURRENT_PROJECT_VERSION = 0.1.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

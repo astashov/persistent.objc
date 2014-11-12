@@ -211,8 +211,10 @@ id<AAIPersistent> addAt(id<AAIPersistent> object, NSArray *path, id value) {
     } else {
         if ([object isKindOfClass:[AABaseVector class]]) {
             return [(AABaseVector *)object addObject:value];
+        } else if ([object isKindOfClass:[AABaseSet class]]) {
+            return [(AABaseSet *)object addObject:value];
         } else {
-            [NSException raise:@"addAt's path leads to not a vector" format:@"We should not call addAt on %@", [object class]];
+            [NSException raise:@"addAt's path leads to not a vector or a set" format:@"We should not call addAt on %@", [object class]];
             return nil;
         }
     }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Persistent"
-  s.version      = "0.1.4"
+  s.version      = "0.1.5"
   s.summary      = "Persistent Data Structures"
 
   s.description  = <<-DESC
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://github.com/astashov/persistent.objc"
   s.license      = "MIT"
   s.author             = { "Anton Astashov" => "anton.astashov@gmail.com" }
-  s.source = { :git => "https://github.com/astashov/persistent.objc.git", :tag => "0.1.4" }
+  s.source = { :git => "https://github.com/astashov/persistent.objc.git", :tag => "0.1.5" }
   s.source_files  = "Persistent/**/*.{h,m}"
   s.public_header_files = "Persistent/Headers/*.h"
   s.requires_arc = true
