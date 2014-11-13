@@ -178,6 +178,8 @@ id<AAIPersistent> removeAt(id<AAIPersistent> object, NSArray *path) {
     } else {
         if ([object isKindOfClass:[AABaseHashMap class]]) {
             return [(AABaseHashMap *)object removeObjectForKey:segment];
+        } else if ([object isKindOfClass:[AABaseSet class]]) {
+            return [(AABaseSet *)object removeObject:segment];
         } else if ([object isKindOfClass:[AABaseVector class]]) {
             NSUInteger index = [(NSNumber *)segment unsignedIntegerValue];
             if ([(AABaseVector *)object count] - 1 == index) {
