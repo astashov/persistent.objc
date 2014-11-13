@@ -93,6 +93,17 @@
     }
 }
 
+-(NSUInteger)indexOfObject:(id)anObject {
+    NSUInteger i = 0;
+    for (id value in self) {
+        if ([value isEqual:anObject]) {
+            return i;
+        }
+        i += 1;
+    }
+    return NSNotFound;
+}
+
 -(AATransientVector *)asTransient {
     return (AATransientVector *)(self.owner ? self : [self ensureOwner:[[AAOwner alloc] init]]);
 }

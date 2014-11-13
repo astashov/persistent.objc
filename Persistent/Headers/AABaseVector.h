@@ -19,6 +19,8 @@
 -(instancetype)addObject:(id)value;
 -(instancetype)removeLastObject;
 
+-(NSUInteger)indexOfObject:(id)anObject;
+
 -(NSArray *)toArray;
 
 -(void)each:(void(^)(id))block;

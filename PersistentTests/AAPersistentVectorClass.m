@@ -144,4 +144,9 @@
     XCTAssertNotEqualObjects(a, c);
 }
 
+-(void)testIndexOfObject {
+    AAPersistentVector *a = [[AAPersistentVector alloc] initWithArray:@[@"a", @"b", @"c", @"d"]];
+    XCTAssertEqual([a indexOfObject:@"c"], 2);
+}
+
 @end
